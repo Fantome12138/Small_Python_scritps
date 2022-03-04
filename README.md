@@ -82,7 +82,7 @@ code0020 | [yolo中文标签](scripts/code0020/label.py) | ✔️
 
 YOLOv5图像识别显示中文标签
 
-code0021 | [](scripts/code0021/.py) | ✔️
+code0021 | [计算gps两点坐标距离](scripts/code0021/gps.py) | ✔️
 
 code0022 | [](scripts/code0022/.py) | ✔️
 
