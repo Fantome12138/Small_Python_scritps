@@ -1,0 +1,11 @@
+from queue import deque
+dq = deque(['a', 'b'])
+dq.append('c')
+print (dq)
+print (dq.pop())
+print (dq)
+print (dq.popleft)
+print (dq)
+dq.appendleft('d')
+print (dq)
+print (len(dq))

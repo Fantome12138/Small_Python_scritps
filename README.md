@@ -84,6 +84,18 @@ YOLOv5图像识别显示中文标签
 
 code0021 | [计算gps两点坐标距离](scripts/code0021/gps.py) | ✔️
 
-code0022 | [](scripts/code0022/.py) | ✔️
+code0022 | [常用queue队列脚本](scripts/code0022/queue.py) | ✔️
+包括常用 Queue脚本 \ deque双边队列脚本 \ 队列多线程Multithreading
+
+code0023 | [](scripts/code0023/.py) | ✔️
+
+code0024 | [](scripts/code0024/.py) | ✔️
+
+code0025 | [](scripts/code0025/.py) | ✔️
+
+
+
+
+
 
 
