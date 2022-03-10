@@ -1,6 +1,6 @@
 # Small_Python_Scripts
 
-说明：下面都是俺常用的python小脚本，作为备份。
+说明：下面都是俺常用的python小脚本，作为备份。(很多代码是网上现成的，但链接很多都找不到了，就这样吧)
 
 ## Learning Road ⛳️
 
@@ -85,22 +85,27 @@ YOLOv5图像识别显示中文标签
 code0021 | [计算gps两点坐标距离](scripts/code0021/gps.py) | ✔️
 
 code0022 | [常用queue队列脚本](scripts/code0022/queue.py) | ✔️
+
 包括常用 Queue脚本 \ deque双边队列脚本 \ 队列多线程Multithreading
 
 code0023 | [cv2写视频](scripts/code0023/videowriter.py) | ✔️
+
 opencv读取图片并保存成视频
 
 code0024 | [cv2视频格式转换](scripts/code0024/transvideo.py) | ✔️
-视频格式转换，例avi --> mp4
 
-code0025 | [](scripts/code0025/.py) | ✔️
+视频格式转换，例 avi --> mp4
 
-code0026 | [](scripts/code0026/.py) | ✔️
+code0025 | [cv2读取海康视频流](scripts/code0025/hik.py) | ✔️
 
-code0027 | [](scripts/code0027/.py) | ✔️
+code0026 | [带时间戳的相机连续拍照](scripts/code0026/Monocular_cam.py) | ✔️
+
+带有微秒级时间戳的单、双目相机连续拍照程序
+
+code0027 | [几种读取图片保存的方法](scripts/code0027/readimg.py) | ✔️
 
 code0028 | [](scripts/code0028/.py) | ✔️
 
 code0029 | [](scripts/code0029/.py) | ✔️
 
-
+code0030 | [](scripts/code0030/.py) | ✔️
