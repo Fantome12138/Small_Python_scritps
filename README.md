@@ -104,8 +104,36 @@ code0026 | [带时间戳的相机连续拍照](scripts/code0026/Monocular_cam.py
 
 code0027 | [几种读取图片保存的方法](scripts/code0027/readimg.py) | ✔️
 
-code0028 | [](scripts/code0028/.py) | ✔️
+code0028 | [读txt温度矩阵转图像](scripts/code0028/matrix2img.py) | ✔️
 
-code0029 | [](scripts/code0029/.py) | ✔️
+根据从热红外设备读取的温度矩阵（保存为txt）将其转换为伪彩图像
 
-code0030 | [](scripts/code0030/.py) | ✔️
+code0029 | [cv鼠标获取像素坐标](scripts/code0029/getcoordinates.py) | ✔️
+
+OpenCV 鼠标点击获取像素坐标并写入txt文件，用于可见光、热红外手动标定工作(提取特征点)
+
+code0030 | [读取txt文件](scripts/code0030/txt.py) | ✔️
+
+python从txt文件中逐行读取数据
+
+code0031 | [cv图像特征的提取](scripts/code0031/Feature_extraction.py) | ✔️
+
+使用opencv提取图像特征：AKAZE、ORB    [Feature_extraction.py]
+使用opencv对提取的特征进行筛选、匹配   [Filter_feature.py]
+
+code0032 | [](scripts/code0032/.py) | ✔️
+
+code0033 | [](scripts/code0033/.py) | ✔️
+
+code0034 | [](scripts/code0034/.py) | ✔️
+
+
+
+
+
+
+
+
+
+
+
