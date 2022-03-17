@@ -127,7 +127,9 @@ code0033 | [IoU计算](scripts/code0033/IoU.py) | ✔️
 
 计算两矩形框IoU & 计算两矩形框相交区域的坐标（重合区）
 
-code0034 | [](scripts/code0034/.py) | ✔️
+code0034 | [ArUco二维码](scripts/code0034/aruco.py) | ✔️
+
+使用aruco标记创建和检测
 
 code0035 | [](scripts/code0035/.py) | ✔️
 
