@@ -131,15 +131,43 @@ code0034 | [ArUco二维码](scripts/code0034/aruco.py) | ✔️
 
 使用aruco标记创建和检测
 
-code0035 | [](scripts/code0035/.py) | ✔️
+code0035 | [图像格式转换](scripts/code0035/img_format_trans.py) | ✔️
 
-code0036 | [](scripts/code0036/.py) | ✔️
+code0036 | [自适应缩放图片](scripts/code0036/letterbox.py) | ✔️
 
-code0037 | [](scripts/code0037/.py) | ✔️
+yolov5自适应缩放图片，32的倍数缩放，空缺部分自动填充--选自/ultralytics/yolov5
 
-code0038 | [](scripts/code0038/.py) | ✔️
+code0037 | [yolov5代码详细解析](scripts/code0037/yolov5.md) | ✔️
+
+代码详细解析，引用自[CSDN--满船清梦压星河HK]
+https://blog.csdn.net/qq_38253797/category_11222727.html
+其中代码被部分分解并进行了测试/scripts/test_code/
+
+/code0037/test_code/files.py
+得到path1路径下的所有文件的路径
+
+/code0037/test_code/img2label_paths.py
+根据path1路径获取path2下所有文件的路径
+
+/code0037/test_code/verify_image_label.py
+用于检查每一张图片和每一张label文件是否完好
+
+code0038 | [判断点是否在多边形内](scripts/code0038/points.py) | ✔️
+判断一个点是否在多边形区域内
+
+/code0038/point2line.py
+计算点到直线的距离
 
 
+code0039 | [](scripts/code0039/.py) | ✔️
 
+code0040 | [](scripts/code0040/.py) | ✔️
 
+code0041 | [](scripts/code0041/.py) | ✔️
+
+code0042 | [](scripts/code0042/.py) | ✔️
+
+code0043 | [](scripts/code0043/.py) | ✔️
+
+code0044 | [](scripts/code0044/.py) | ✔️
 
