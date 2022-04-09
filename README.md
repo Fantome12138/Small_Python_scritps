@@ -137,6 +137,30 @@ code0036 | [自适应缩放图片](scripts/code0036/letterbox.py) | ✔️
 
 yolov5自适应缩放图片，32的倍数缩放，空缺部分自动填充--选自/ultralytics/yolov5
 
+scripts/code0036/resize_img.py
+python等比例缩放图片
+
+scripts/code0036/S2L_img.py
+python 将小图放入较大的白色或黑色背景图片
+
+scripts/code0036/dilate.py
+opencv提取指定颜色区域及图像腐蚀、膨胀简单介绍
+
+scripts/code0036/noise_img.py
+对图像进行增强操作(旋转，缩放，剪切，平移，加噪声)
+
+scripts/code0036/windows_img.py
+Python对图片进行滑动窗提取局部区域
+
+scripts/code0036/plot_point.py
+Python在图片上绘制指定半径的圆
+
+scripts/code0036/findContours.py
+Python图片查找轮廓、多边形拟合、最小外接矩形操作实例
+
+scripts/code0036/frame_diff.py
+帧差法得到运动背景图像(简单差分方法)
+
 code0037 | [yolov5代码详细解析](scripts/code0037/yolov5.md) | ✔️
 
 代码详细解析，引用自[CSDN--满船清梦压星河HK]
@@ -152,6 +176,9 @@ https://blog.csdn.net/qq_38253797/category_11222727.html
 /code0037/test_code/verify_image_label.py
 用于检查每一张图片和每一张label文件是否完好
 
+/code0037/test_code/augmeng_hsv.py
+hsv空间变换
+
 code0038 | [判断点是否在多边形内](scripts/code0038/points.py) | ✔️
 判断一个点是否在多边形区域内
 
@@ -159,9 +186,9 @@ code0038 | [判断点是否在多边形内](scripts/code0038/points.py) | ✔️
 计算点到直线的距离
 
 
-code0039 | [](scripts/code0039/.py) | ✔️
+code0039 | [opencv提取指定颜色](scripts/code0039/Twog_r_b.py) | ✔️
 
-code0040 | [](scripts/code0040/.py) | ✔️
+code0040 | [利用python多进程程或多线程的方式获取数据](scripts/code0040/mutiprocess.py) | ✔️
 
 code0041 | [](scripts/code0041/.py) | ✔️
 
