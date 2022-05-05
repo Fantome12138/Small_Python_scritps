@@ -190,11 +190,28 @@ code0039 | [opencv提取指定颜色](scripts/code0039/Twog_r_b.py) | ✔️
 
 code0040 | [利用python多进程程或多线程的方式获取数据](scripts/code0040/mutiprocess.py) | ✔️
 
-code0041 | [](scripts/code0041/.py) | ✔️
+code0041 | [python获取linux系统信息](scripts/code0041/get_sysinfo.py) | ✔️
 
-code0042 | [](scripts/code0042/.py) | ✔️
+code0042 | [json数据字段过滤](scripts/code0042/jsonfilter.py) | ✔️
 
-code0043 | [](scripts/code0043/.py) | ✔️
+code0043 | [多属性排序funtools](scripts/code0043/funtools.py) | ✔️
 
-code0044 | [](scripts/code0044/.py) | ✔️
+code0044 | [Python 中循环语句速度对比](scripts/code0044/looptest.py) | ✔️
+
+code0045 | [Python 列表的交集、并集、差集](scripts/code0045/test.py) | ✔️
+
+code0046 | [](scripts/code0046/.py) | ✔️
+
+code0047 | [](scripts/code0047/.py) | ✔️
+
+code0048 | [](scripts/code0048/.py) | ✔️
+
+code0049 | [](scripts/code0049/.py) | ✔️
+
+code0050 | [](scripts/code0050/.py) | ✔️
+
+
+
+
+
 
