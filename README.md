@@ -161,11 +161,11 @@ Python图片查找轮廓、多边形拟合、最小外接矩形操作实例
 scripts/code0036/frame_diff.py
 帧差法得到运动背景图像(简单差分方法)
 
-code0037 | [yolov5代码详细解析](scripts/code0037/yolov5.md) | ✔️
+## code0037 | [yolov5代码详细解析](scripts/code0037/yolov5.md) |  
 
 代码详细解析，引用自[CSDN--满船清梦压星河HK]
 https://blog.csdn.net/qq_38253797/category_11222727.html
-其中代码被部分分解并进行了测试/scripts/test_code/
+其中代码被部分分解并进行测试 /scripts/test_code/..
 
 /code0037/test_code/files.py
 得到path1路径下的所有文件的路径
@@ -178,6 +178,24 @@ https://blog.csdn.net/qq_38253797/category_11222727.html
 
 /code0037/test_code/augmeng_hsv.py
 hsv空间变换
+
+/code0037/test_code/check_online.py
+检查当前主机是否联网了
+
+/code37/test_code/check_file.py
+检查相关文件路径是否可以找到该文件，若无返回None，找到则返回本地匹配到的第一个文件名，若为网络文件则下载
+
+/code37/test_code/clip_corrds.py
+将bbox坐标限定在图像尺寸内，防止出界
+and 将坐标coords(x1y1x2y2)从img1_shape尺寸缩放到img0_shape尺寸
+and xyxy2xywh  xywh2xyxy
+and xywhn2xyxy、xyxy2xywhn、xyn2xy
+xywhn2xyxy是将xywh(normalized) -> x1y1x2y2；xyxy2xywhn是将x1y1x2y2 -> xywh(normalized)；xyn2xy是将xy(normalized) -> xy
+
+/code37/test_code/non_max_suppression.py
+NMS(非极大值抑制)  
+
+
 
 code0038 | [判断点是否在多边形内](scripts/code0038/points.py) | ✔️
 判断一个点是否在多边形区域内
@@ -200,9 +218,13 @@ code0044 | [Python 中循环语句速度对比](scripts/code0044/looptest.py) | 
 
 code0045 | [Python 列表的交集、并集、差集](scripts/code0045/test.py) | ✔️
 
-code0046 | [](scripts/code0046/.py) | ✔️
+code0046 | [超时处理函数timeout](scripts/code0046/timeout.py) | ✔️
 
-code0047 | [](scripts/code0047/.py) | ✔️
+设置一个超时函数 如果某个程序执行超时  就会触发超时处理函数_timeout_handler 返回超时异常信息
+
+code0047 | [打印或logging保存输出加颜色（好看）](scripts/code0047/color.py) | ✔️
+
+将输出的开头和结尾加上颜色，使命令行输出显示会更加好看
 
 code0048 | [](scripts/code0048/.py) | ✔️
 

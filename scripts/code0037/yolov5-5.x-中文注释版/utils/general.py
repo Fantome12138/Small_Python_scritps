@@ -87,7 +87,7 @@ def init_seeds(seed=0):
     random.seed(seed)
     # 设置随机数 针对使用np.random.rand()生成随机数的时候相同
     np.random.seed(seed)
-    # 为CPU设置种子用于生成随机数的时候相同  并确定训练模式
+    # 为CPU设置种子用于生成随机数的时候相同,并确定训练模式
     init_torch_seeds(seed)
 
 def get_latest_run(search_dir='.'):
