@@ -31,7 +31,8 @@ for fileNum in img: #遍历文件夹
         (shotname, extension) = os.path.splitext(tempimgname); #将文件名文本与文件后缀分开
 
 # 2.将取出来的文件名文本与特定后缀拼接,再与路径B拼接,得到B目录下的文件
-        tempxmlname = '%s.xml' % shotname
+        tempxmlname = '%s.jpg' % shotname
+        # tempxmlname = '%s.xml' % shotname
         xmlname = os.path.join(label_dir, tempxmlname)
 
 # 3.根据得到的xml文件名,将对应文件拷贝到指定目录C
