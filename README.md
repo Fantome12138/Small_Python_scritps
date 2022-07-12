@@ -49,6 +49,7 @@ code009 | [opencv剪切ROI](scripts/code009/cv2cutROI.py) | ✔️
 code0010 | [txt格式转xml](scripts/code0010/txt2xml.py) | ✔️
 
 code0011 | [计算xml目标种类数量](scripts/code0011/countxml.py) | ✔️
+         | [计算txt目标种类数量](scripts/code0011/counttxt.py) | ✔️
 
 根据xml文件统计目标种类以及数量
 
@@ -226,7 +227,7 @@ code0047 | [打印或logging保存输出加颜色（好看）](scripts/code0047/
 
 将输出的开头和结尾加上颜色，使命令行输出显示会更加好看
 
-code0048 | [](scripts/code0048/.py) | ✔️
+code0048 | [强制停止线程](scripts/code0048/stopthread.py) | ✔️
 
 code0049 | [](scripts/code0049/.py) | ✔️
 
