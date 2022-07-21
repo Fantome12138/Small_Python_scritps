@@ -229,7 +229,9 @@ code0047 | [打印或logging保存输出加颜色（好看）](scripts/code0047/
 
 code0048 | [强制停止线程](scripts/code0048/stopthread.py) | ✔️
 
-code0049 | [](scripts/code0049/.py) | ✔️
+code0049 | [切分图像并保留xml标记](scripts/code0049/crop_img.py) | ✔️
+
+按步长切分图像，并保留每幅切分后图像含有的xml标记；问题：部分重叠区域目标bbox的xml会丢失。
 
 code0050 | [](scripts/code0050/.py) | ✔️
 
