@@ -29,7 +29,7 @@ code003 | [文件重命名](scripts/code003/renamefile.py)  | ✔️
 文件批量重命名脚本
 
 code004 | [视频抽帧为图片](scripts/code004/video2img.py) | ✔️
-          [图片整合成视频](scripts/code004/img2video.py) |
+           [图片整合成视频](scripts/code004/img2video.py) |
 
 读取视频.mp4，将其抽帧转换成单幅图像保存
 读取图片序列，将其转换成视频保存
@@ -76,6 +76,10 @@ code0017 | [Python批量创建txt](scripts/code0016/txt.py) | ✔️
 code0018 | [标注原始图像](scripts/code0018/drawbbox.py) | ✔️
 
 批量将标注数据在原始图片中画出来&保存xml以便微调
+       
+            [yolo格式画框](scripts/code0018/yolo_drawbbox.py)
+
+            [coco格式画框](scripts/code0018/coco_drawbbox.py)
 
 code0019 | [测试生成bbox](scripts/code0019/drawbbox.py) | ✔️
 
@@ -233,10 +237,14 @@ code0049 | [切分图像并保留xml标记](scripts/code0049/crop_img.py) | ✔�
 
 按步长切分图像，并保留每幅切分后图像含有的xml标记；问题：部分重叠区域目标bbox的xml会丢失。
 
-code0050 | [](scripts/code0050/.py) | ✔️
+code0050 | [监控python脚本是否运行](scripts/code0050/monitoring.py) | ✔️
 
+         |  [shell监控python脚本是否运行](scripts/code0050/monitoring.sh) | ✔️
 
+monitoring.py使用python监控某py脚本是否运行
+monitoring.sh使用shell监控某py脚本是否运行,否则后台启动脚本
 
+code0051 | [py设置logging](scripts/code0050/pylogging.py) | ✔️
 
-
+创建loggings类，多py脚本可创建log实例，保存至同一.log文件
 
