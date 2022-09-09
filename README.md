@@ -244,7 +244,12 @@ code0050 | [监控python脚本是否运行](scripts/code0050/monitoring.py) | �
 monitoring.py使用python监控某py脚本是否运行
 monitoring.sh使用shell监控某py脚本是否运行,否则后台启动脚本
 
-code0051 | [py设置logging](scripts/code0050/pylogging.py) | ✔️
+code0051 | [py设置logging](scripts/code0051/pylogging.py) | ✔️
 
 创建loggings类，多py脚本可创建log实例，保存至同一.log文件
 
+code0052 | [yolov5自动标注数据](scripts/code0052/autolabel.py) | ✔️
+
+linux环境下使用已有模型自动化标注新数据，生成xml文件
+
+参考使用https://github.com/WangRongsheng/KDAT/tree/main/autoLabel
