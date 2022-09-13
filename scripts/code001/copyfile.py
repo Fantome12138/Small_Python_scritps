@@ -20,9 +20,9 @@ label_dir = 'D:\\Dataset\\all_xml\\'
 annotion_dir = 'C:\\Users\\label\\'
  
 # 1.将指定A目录下的文件名取出,并将文件名文本和文件后缀拆分出来
-img = os.listdir(source_dir)  #得到文件夹下所有文件名称
+imgs = os.listdir(source_dir)  #得到文件夹下所有文件名称
 s = []
-for fileNum in img: #遍历文件夹
+for fileNum in imgs: #遍历文件夹
     if not os.path.isdir(fileNum): #判断是否是文件夹,不是文件夹才打开
         print(fileNum)  #打印出文件名
         imgname = os.path.join(source_dir, fileNum)
@@ -31,7 +31,7 @@ for fileNum in img: #遍历文件夹
         (shotname, extension) = os.path.splitext(tempimgname); #将文件名文本与文件后缀分开
 
 # 2.将取出来的文件名文本与特定后缀拼接,再与路径B拼接,得到B目录下的文件
-        tempxmlname = '%s.jpg' % shotname
+        tempxmlname = '%s.xml' % shotname
         # tempxmlname = '%s.xml' % shotname
         xmlname = os.path.join(label_dir, tempxmlname)
 

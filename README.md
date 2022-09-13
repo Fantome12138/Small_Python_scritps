@@ -50,8 +50,11 @@ code009 | [opencv剪切ROI](scripts/code009/cv2cutROI.py) | ✔️
 
 code0010 | [txt格式转xml](scripts/code0010/txt2xml.py) | ✔️
 
-code0011 | [计算xml目标种类数量](scripts/code0011/countxml.py) | ✔️
-         | [计算txt目标种类数量](scripts/code0011/counttxt.py) | ✔️
+code0011 | [统计xml目标种类数量](scripts/code0011/countxml.py) | ✔️
+         | [统计txt目标种类数量](scripts/code0011/counttxt.py) | ✔️
+         | [统计数据集GT大中小个数](scripts/code0011/count_bboxSML.py) | ✔️
+         局限:统计真实标注框大小，仅有96*96，32*32等，针对640^2的图片，自己的的数据集要改统计框的尺寸
+
 
 根据xml文件统计目标种类以及数量
 
@@ -76,10 +79,8 @@ code0017 | [Python批量创建txt](scripts/code0016/txt.py) | ✔️
 code0018 | [标注原始图像](scripts/code0018/drawbbox.py) | ✔️
 
 批量将标注数据在原始图片中画出来&保存xml以便微调
-       
-            [yolo格式画框](scripts/code0018/yolo_drawbbox.py)
-
-            [coco格式画框](scripts/code0018/coco_drawbbox.py)
+         | [yolo格式画框](scripts/code0018/yolo_drawbbox.py) | ✔️
+         | [coco格式画框](scripts/code0018/coco_drawbbox.py) | ✔️
 
 code0019 | [测试生成bbox](scripts/code0019/drawbbox.py) | ✔️
 
@@ -238,8 +239,7 @@ code0049 | [切分图像并保留xml标记](scripts/code0049/crop_img.py) | ✔�
 按步长切分图像，并保留每幅切分后图像含有的xml标记；问题：部分重叠区域目标bbox的xml会丢失。
 
 code0050 | [监控python脚本是否运行](scripts/code0050/monitoring.py) | ✔️
-
-         |  [shell监控python脚本是否运行](scripts/code0050/monitoring.sh) | ✔️
+         | [shell监控python脚本是否运行](scripts/code0050/monitoring.sh) | ✔️
 
 monitoring.py使用python监控某py脚本是否运行
 monitoring.sh使用shell监控某py脚本是否运行,否则后台启动脚本
@@ -253,3 +253,18 @@ code0052 | [yolov5自动标注数据](scripts/code0052/autolabel.py) | ✔️
 linux环境下使用已有模型自动化标注新数据，生成xml文件
 
 参考使用https://github.com/WangRongsheng/KDAT/tree/main/autoLabel
+
+code0053 | [copy_paste数据增强](scripts/code0053/copy_paste.py) | ✔️
+           针对小目标的数据增强，随机复制小目标到训练图像里
+         | [数据增强反转图像及label](scripts/code0053/filpimgs.py) | ✔️
+         | [数据增强简单增强亮度对比度](scripts/code0053/color.py) | ✔️
+         
+
+code0054 | [语义分割评判指标计算](scripts/code0054/judge.py) | ✔️
+
+参考：https://blog.csdn.net/sinat_29047129/article/details/103642140
+
+
+
+
+
