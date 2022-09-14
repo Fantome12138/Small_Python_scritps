@@ -201,8 +201,22 @@ and xywhn2xyxy、xyxy2xywhn、xyn2xy
 xywhn2xyxy是将xywh(normalized) -> x1y1x2y2；xyxy2xywhn是将x1y1x2y2 -> xywh(normalized)；xyn2xy是将xy(normalized) -> xy
 
 /code37/test_code/non_max_suppression.py
-NMS(非极大值抑制)  
-
+NMS(非极大值抑制)
+.  
+         | [计算测试数据集mAP](scripts/code0037/mAP/compute_mAP.py) | ✔️
+         注：
+         在yolo文件夹下创建./data_test
+         并创建/Annotations_manual/    放置xml
+               /JPEGImages_manual/    放置图像
+               /predictions_manual/
+               /cachedir_manual/
+               /class_txt_manual/
+         在cfg_mAP.py中修改配置(测试图片等)
+         运行detect_eval_class_txt.py，获得测试图片的cls_ap.pkl
+         运行mAP_line.py获得每个类别的mAP曲线
+.
+         | [yolo自带val.py计算mAP](scripts/code0037/None) | ✔️
+         运行val.py获取mAP
 
 
 code0038 | [判断点是否在多边形内](scripts/code0038/points.py) | ✔️
@@ -263,6 +277,9 @@ code0053 | [copy_paste数据增强](scripts/code0053/copy_paste.py) | ✔️
 code0054 | [语义分割评判指标计算](scripts/code0054/judge.py) | ✔️
 
 参考：https://blog.csdn.net/sinat_29047129/article/details/103642140
+
+
+
 
 
 

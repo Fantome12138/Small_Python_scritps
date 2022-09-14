@@ -1,28 +1,27 @@
-# def friends(greet, *args, **kwargs):
-#     for names in args:
-#         print(f"{greet} to the Programming zone {names}")
-#     print("\nI am Veronica and I would like to announce your roles:")
-#     for key, value in kwargs.items():
-#         print(f"{key} is a {value}")
+import argparse
 
-# greet = "Welcome"
-# names = ["Sachin", "Rishu", "Yashwant", "Abhishek"]
-# roles = {"Sachin":"Chief Instructor", "Rishu":"Engineer",
-#          "Yashwant":"Lab Technician", "Abhishek":"Marketing Manager"}
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
 
-# friends(greet, *names, **roles)
-# switch = {"valueA":functionA,"valueB":functionB,"valueC":functionC}
-# try:
-#　　switch["value"]() #执行相应的方法。
-# except KeyError as e:
-#       pass 或 functionX #执行default部分
+    parser.add_argument(
+        'positional_argument',
+        help='this is a positional argument',
+    )
+    parser.add_argument(
+        '--arg1',
+        help='the first argument',
+        type=int,
+        dest='arg1',
+        default=1,
+    )
+    parser.add_argument(
+        '--arg2',
+        help='the second argument',
+        type=str,
+        dest='arg2',
+    )
 
-switch = {
-    "a":lambda x:x*2,
-    "b":lambda x:x*3,
-    "c":lambda x:x**x
-}
-try:
-    switch["c"](6)
-except KeyError as e:
-    pass
+    args = parser.parse_args()
+    pos_argument = args.positional_argument
+    arg1 = args.arg1
+    arg2 = args.arg2
