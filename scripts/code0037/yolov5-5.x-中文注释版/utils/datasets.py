@@ -71,9 +71,11 @@ def exif_size(img):
 def create_dataloader(path, imgsz, batch_size, stride, single_cls=False,
                       hyp=None, augment=False, cache=False, pad=0.0, rect=False,
                       rank=-1, workers=8, image_weights=False, quad=False, prefix=''):
-    """在train.py中被调用，用于生成Trainloader, dataset，testloader
+    """
+    在train.py中被调用，用于生成Trainloader, dataset, testloader
     自定义dataloader函数: 调用LoadImagesAndLabels获取数据集(包括数据增强) + 调用分布式采样器DistributedSampler +
                         自定义InfiniteDataLoader 进行永久持续的采样数据
+                        
     :param path: 图片数据加载路径 train/test  如: ../datasets/VOC/images/train2007
     :param imgsz: train/test图片尺寸（数据增强后大小） 640
     :param batch_size: batch size 大小 8/16/32
@@ -121,6 +123,7 @@ def create_dataloader(path, imgsz, batch_size, stride, single_cls=False,
                         collate_fn=LoadImagesAndLabels.collate_fn4 if quad else LoadImagesAndLabels.collate_fn)
     return dataloader, dataset
 
+
 class InfiniteDataLoader(torch.utils.data.dataloader.DataLoader):
     """ Dataloader that reuses workers
     当image_weights=False时就会调用这两个函数 进行自定义DataLoader
@@ -141,6 +144,8 @@ class InfiniteDataLoader(torch.utils.data.dataloader.DataLoader):
     def __iter__(self):
         for i in range(len(self)):
             yield next(self.iterator)
+            
+
 class _RepeatSampler(object):
     """ Sampler that repeats forever
     这部分是进行持续采样
@@ -154,6 +159,7 @@ class _RepeatSampler(object):
     def __iter__(self):
         while True:
             yield from iter(self.sampler)
+
 
 class LoadImagesAndLabels(Dataset):
     # for training/testing
@@ -1290,7 +1296,7 @@ class LoadImages:  # for inference
         return self
 
     def __next__(self):
-        """与iter一起用？"""
+        """与iter一起用"""
         if self.count == self.nf:  # 数据读完了
             raise StopIteration
         path = self.files[self.count]  # 读取当前文件路径
