@@ -49,6 +49,7 @@ code008 | [json转txt格式](scripts/code008/json2txt.py) | ✔️
 code009 | [opencv剪切ROI](scripts/code009/cv2cutROI.py) | ✔️
 
 code0010 | [txt格式转xml](scripts/code0010/txt2xml.py) | ✔️
+           [xml格式转txt](scripts/code0010/xml2txt.py) | ✔️
 
 code0011 | [统计xml目标种类数量](scripts/code0011/countxml.py) | ✔️
          | [统计txt目标种类数量](scripts/code0011/counttxt.py) | ✔️
