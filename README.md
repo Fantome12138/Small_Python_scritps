@@ -285,6 +285,9 @@ code0055 | [统计文件夹下各源代码文件行数](scripts/code0055/count_l
 
 结果保存至.txt文件
 
+code0055 | [常用装饰器](scripts/code0056/decorators.py) | ✔️
+
+装饰器：计算函数运行时长；记录函数输入输出数据
 
 
 
