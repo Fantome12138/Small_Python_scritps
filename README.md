@@ -285,12 +285,25 @@ code0055 | [统计文件夹下各源代码文件行数](scripts/code0055/count_l
 
 结果保存至.txt文件
 
-code0055 | [常用装饰器](scripts/code0056/decorators.py) | ✔️
+code0056 | [常用装饰器](scripts/code0056/decorators.py) | ✔️
             装饰器：计算函数运行时长；记录函数输入输出数据
            [func_timeout和retrying](scripts/code0056/retrying.py) | ✔️
             实现函数超时重试 & 函数异常重试
             使用包func_timeout & retrying
 
+code0057 | [python socket](scripts/code0057/test_socket.py) | ✔️
 
+socket服务端、客户端，两方均实现断开重连
+
+code0058 | [threading](scripts/code0058/threadingCondition.py) | ✔️
+
+python多线程操作, 具体内容见Py3CookBook.md --> 第十二章：并发编程
+
+实现使用wait()方法释放锁，并阻塞程序直到其他线程调用notify()或者notify_all()方法唤醒，然后wait()方法重新获取锁，
+类似于event.wait()方式，但看起来更高级。
+
+code0058 | [flac](scripts/code0059/ncm2flac_new.py) | ✔️
+
+ncm格式音乐转flac格式
 
 
