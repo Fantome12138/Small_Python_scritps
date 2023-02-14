@@ -302,8 +302,14 @@ python多线程操作, 具体内容见Py3CookBook.md --> 第十二章：并发�
 实现使用wait()方法释放锁，并阻塞程序直到其他线程调用notify()或者notify_all()方法唤醒，然后wait()方法重新获取锁，
 类似于event.wait()方式，但看起来更高级。
 
-code0058 | [flac](scripts/code0059/ncm2flac_new.py) | ✔️
+code0059 | [flac](scripts/code0059/ncm2flac_new.py) | ✔️
 
 ncm格式音乐转flac格式
+
+code0060 | [find circle](scripts/code0060/find_circle.py) | ✔️
+
+opencv方法寻找圆形
+
+
 
 
