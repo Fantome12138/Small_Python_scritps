@@ -310,6 +310,11 @@ code0060 | [find circle](scripts/code0060/find_circle.py) | ✔️
 
 opencv方法寻找圆形
 
+code0061 | [find EulerAngles](scripts/code0061/EulerAngles.py) | ✔️
 
+[欧拉角、旋转向量和旋转矩阵的相互转换](https://www.jianshu.com/p/5e130c04a602)
 
+code0062 | [find QR code](scripts/code0062/find_qr.py) | ✔️
+
+使用opencv，通过检测轮廓方式定位qrcode并抠出码
 
