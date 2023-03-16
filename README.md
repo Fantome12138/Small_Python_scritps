@@ -20,6 +20,9 @@ code001 | [根据当前文件名批量复制](scripts/code001/copyfile.py)  | �
 
 根据指定目录下文件，获取其他文件夹下相同名称文件，voc数据集中选择若干.jpg，从其他文件夹获取对应的.xml文件到新的文件夹
 
+(scripts/code001/copyfile2.py) 
+获取文件夹下所有指定格式文件，复制到其他文件夹
+
 code002 | [两列表排序保持对应关系](scripts/code002/sort2list.py)  | ✔️
 
 两个列表元素排序后保持元素对应关系
@@ -37,6 +40,9 @@ code004 | [视频抽帧为图片](scripts/code004/video2img.py) | ✔️
 code005 | [随机复制文件](scripts/code005/randomcopy.py) | ✔️
 
 随机复制文件到指定文件夹
+
+(scripts/code005/randomdelete.py) 
+按比例随机删除文件
 
 code006 | [CPU压力测试](scripts/code006/cputest.py) | ✔️
 
@@ -318,3 +324,15 @@ code0062 | [find QR code](scripts/code0062/find_qr.py) | ✔️
 
 使用opencv，通过检测轮廓方式定位qrcode并抠出码
 
+code0063 | [MaxPooling2D](scripts/code0063/MaxPooling2D.py) | ✔️
+
+使用np,复现torch中的maxpooling函数
+
+code0064 | [backprogram numpy](scripts/code0064/fc_mnist.py) | ✔️
+
+利用numpy实现神经网络,前向反向传播，mnist数据。
+https://zhuanlan.zhihu.com/p/86593676
+
+code0065 | [BatchNormalization numpy](scripts/code0065/BatchNormalization.py) | ✔️
+
+numpy实现BN
