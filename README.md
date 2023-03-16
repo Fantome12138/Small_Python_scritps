@@ -333,6 +333,13 @@ code0064 | [backprogram numpy](scripts/code0064/fc_mnist.py) | ✔️
 利用numpy实现神经网络,前向反向传播，mnist数据。
 https://zhuanlan.zhihu.com/p/86593676
 
-code0065 | [BatchNormalization numpy](scripts/code0065/BatchNormalization.py) | ✔️
+(scripts/code0064/mnist_cnn.py)
+通过使用numpy来搭建一个基础的包含卷积层、池化层、全连接层和Softmax层的卷积神经网络，并选择relu作为我们的激活函数，选择多分类交叉熵损失函数，最后使用了mnist数据集进行了训练和测试。
+
+code0065 | [BatchNormalization numpy](scripts/code0065/BatchNormalization1.py) | ✔️
 
 numpy实现BN
+
+
+
+
