@@ -5,9 +5,8 @@ class BatchNormlization(Layers):
     """
     https://zhuanlan.zhihu.com/p/483888908
     https://blog.csdn.net/weixin_44754861/article/details/108343938?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_utm_term~default-5.pc_relevant_paycolumn_v3&spm=1001.2101.3001.4242.4&utm_relevant_index=7
-
     """
-    def __init__(self, name, x,eps =1e-7, momentum =0.9, mode = "train"):
+    def __init__(self, name, x,eps =1e-7, momentum=0.9, mode = "train"):
         super(BatchNormlization).__init__(name)
         self.eps =eps
         self.input = x
@@ -45,7 +44,6 @@ class BatchNormlization(Layers):
         else:
             raise ValueError("Invalid forward batch normlization mode")
         return dout, self.cache
-
 
     def backward(self, dout):
         N, D = dout.shape

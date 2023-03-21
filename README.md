@@ -328,10 +328,14 @@ code0063 | [MaxPooling2D](scripts/code0063/MaxPooling2D.py) | ✔️
 
 使用np,复现torch中的maxpooling函数
 
-code0064 | [backprogram numpy](scripts/code0064/fc_mnist.py) | ✔️
+code0064 | [backprogram numpy](scripts/code0064/bp_mnist/fc_mnist.py) | ✔️
 
-利用numpy实现神经网络,前向反向传播，mnist数据。
+1、利用numpy实现神经网络,前向反向传播，mnist数据。
 https://zhuanlan.zhihu.com/p/86593676
+
+2、纯numpy实现CNN模块（LeNet5）  
+(scripts/code0064/numpy-realizes-CNN-master/) |
+https://zhuanlan.zhihu.com/p/296592264
 
 (scripts/code0064/mnist_cnn.py)
 通过使用numpy来搭建一个基础的包含卷积层、池化层、全连接层和Softmax层的卷积神经网络，并选择relu作为我们的激活函数，选择多分类交叉熵损失函数，最后使用了mnist数据集进行了训练和测试。
@@ -339,6 +343,12 @@ https://zhuanlan.zhihu.com/p/86593676
 code0065 | [BatchNormalization numpy](scripts/code0065/BatchNormalization1.py) | ✔️
 
 numpy实现BN
+
+code0066 | [NMS numpy](scripts/code0066/NMS.py) | ✔️
+
+1\将所有的boxes按照置信度从小到大排序，然后从boxes中删除置信度最大的box
+2\将剩下的boxes与置信度最大的box，分别计算iou，去掉iou大于阈值(iou_threshold)的boxes
+3\重复1，2直到索引为空
 
 
 

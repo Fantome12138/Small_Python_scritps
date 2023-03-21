@@ -32,7 +32,7 @@ class MyBN:
         """
         x_mean = x.mean(axis=0)
         x_var = x.var(axis=0)
-        # 对应running_mean的更新公式
+        # 对应running_mean的更新公式, 仅测试时使用，训练时不用
         self._running_mean = (1-self._momentum)*x_mean + self._momentum*self._running_mean
         self._running_var = (1-self._momentum)*x_var + self._momentum*self._running_var
         # 对应论文中计算BN的公式
@@ -54,10 +54,3 @@ my_bn._beta = bn_torch.bias.detach().numpy()
 my_bn._gamma = bn_torch.weight.detach().numpy()
 bn_output = my_bn.batch_norm(data, )
 print(bn_output)
-
-
-
-
-
-
-
