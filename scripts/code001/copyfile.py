@@ -35,6 +35,10 @@ for fileNum in items: #遍历文件夹
         xmlname = os.path.join(target_dir, temptargetname)
         print(xmlname)
 # 3.根据得到的xml文件名,将对应文件拷贝到指定目录C
-        shutil.copy(xmlname, final_dir)
+        try:
+            shutil.copy(xmlname, final_dir)
+        except Exception as err:
+            print(err)
+            continue
 
 print('okk')

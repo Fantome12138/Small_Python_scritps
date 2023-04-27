@@ -16,6 +16,30 @@ def box_iou(box1 :array, box2: array):
     iou = inter / (area1[:, np.newaxis] + area2 - inter)
     return iou  # NxM
 
+def easy_NMS(arr, thresh):
+    x1 = arr[:, 0]
+    y1 = arr[:, 1]
+    x2 = arr[:, 2]
+    y2 = arr[:, 3]
+    score = arr[:, 4]
+    areas = (x2 - x1 + 1) * (y2 - y1 + 1)
+    order = score.argsort()[::-1]
+    keep = []
+    while order.size > 0:
+        i = order[0]
+        keep.append(i)
+        xx1 = np.maximum(x1[i], x1[order[1:]])
+        yy1 = np.maximum(y1[i], y1[order[1:]])
+        xx2 = np.minimum(x2[i], x2[order[1:]])
+        yy2 = np.minimum(y2[i], y2[order[1:]])
+        w = np.maximum(0, xx2-xx1+1)
+        h = np.maximum(0, yy2-yy1+1)
+        inter = w * h
+        ious = inter / (areas[i] + areas[order[1:]] - inter)
+        index = np.where(ious <= thresh)[0]
+        order = order[index+1]
+    return keep
+
 def numpy_nms(boxes :array, scores :array, iou_threshold :float):
     idxs = scores.argsort()  # 按分数 降序排列的索引 [N]
     keep = []

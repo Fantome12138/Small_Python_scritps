@@ -42,6 +42,7 @@ code005 | [随机复制文件](scripts/code005/randomcopy.py) | ✔️
 随机复制文件到指定文件夹
 
 (scripts/code005/randomdelete.py) 
+
 按比例随机删除文件
 
 code006 | [CPU压力测试](scripts/code006/cputest.py) | ✔️
@@ -140,7 +141,10 @@ code0032 | [从rosbag读取图片](scripts/code0032/rosbag.py) | ✔️
 
 code0033 | [IoU计算](scripts/code0033/IoU.py) | ✔️
 
-计算两矩形框IoU & 计算两矩形框相交区域的坐标（重合区）
+1、计算两矩形框IoU & 计算两矩形框相交区域的坐标（重合区）
+2、GIou计算
+3、CIou计算
+4、DIou计算
 
 code0034 | [ArUco二维码](scripts/code0034/aruco.py) | ✔️
 
@@ -182,50 +186,48 @@ scripts/code0036/frame_diff.py
 https://blog.csdn.net/qq_38253797/category_11222727.html
 其中代码被部分分解并进行测试 /scripts/test_code/..
 
-/code0037/test_code/files.py
+[获取文件路径](/code0037/test_code/files.py)
 得到path1路径下的所有文件的路径
-
 /code0037/test_code/img2label_paths.py
 根据path1路径获取path2下所有文件的路径
 
-/code0037/test_code/verify_image_label.py
+[检查label](/code0037/test_code/verify_image_label.py)
 用于检查每一张图片和每一张label文件是否完好
 
-/code0037/test_code/augmeng_hsv.py
-hsv空间变换
+[hsv空间变换](/code0037/test_code/augmeng_hsv.py)
 
-/code0037/test_code/check_online.py
-检查当前主机是否联网了
+[检查主机是否联网](/code0037/test_code/check_online.py)
 
-/code37/test_code/check_file.py
+[检查文件是否存在](/code37/test_code/check_file.py)
 检查相关文件路径是否可以找到该文件，若无返回None，找到则返回本地匹配到的第一个文件名，若为网络文件则下载
 
-/code37/test_code/clip_corrds.py
+[切图像](/code37/test_code/clip_corrds.py)
 将bbox坐标限定在图像尺寸内，防止出界
 and 将坐标coords(x1y1x2y2)从img1_shape尺寸缩放到img0_shape尺寸
 and xyxy2xywh  xywh2xyxy
 and xywhn2xyxy、xyxy2xywhn、xyn2xy
 xywhn2xyxy是将xywh(normalized) -> x1y1x2y2；xyxy2xywhn是将x1y1x2y2 -> xywh(normalized)；xyn2xy是将xy(normalized) -> xy
 
-/code37/test_code/non_max_suppression.py
-NMS(非极大值抑制)
-.  
-         | [计算测试数据集mAP](scripts/code0037/mAP/compute_mAP.py) | ✔️
-         注：
-         在yolo文件夹下创建./data_test
-         并创建/Annotations_manual/    放置xml
-               /JPEGImages_manual/    放置图像
-               /predictions_manual/
-               /cachedir_manual/
-               /class_txt_manual/
-         在cfg_mAP.py中修改配置(测试图片等)
-         运行detect_eval_class_txt.py，获得测试图片的cls_ap.pkl
-         运行mAP_line.py获得每个类别的mAP曲线
-.
-         | [yolo自带val.py计算mAP](scripts/code0037/None) | ✔️
-         运行val.py获取mAP
-         -
-         | [一些能用到的脚本](scripts/code0037/test_code/use.py)
+[Mosaic数据增强](/code37/test_code/Mosaic.py)
+
+[NMS](/code37/test_code/non_max_suppression.py)
+
+[计算测试数据集mAP](scripts/code0037/mAP/compute_mAP.py) | ✔️
+注：
+在yolo文件夹下创建./data_test
+并创建/Annotations_manual/    放置xml
+      /JPEGImages_manual/    放置图像
+      /predictions_manual/
+      /cachedir_manual/
+      /class_txt_manual/
+在cfg_mAP.py中修改配置(测试图片等)
+运行detect_eval_class_txt.py，获得测试图片的cls_ap.pkl
+运行mAP_line.py获得每个类别的mAP曲线
+
+[yolo自带val.py计算mAP](scripts/code0037/None) | ✔️
+运行val.py获取mAP
+
+[一些能用到的脚本](scripts/code0037/test_code/use.py)
 
 
 code0038 | [判断点是否在多边形内](scripts/code0038/points.py) | ✔️
@@ -234,6 +236,8 @@ code0038 | [判断点是否在多边形内](scripts/code0038/points.py) | ✔️
 
 
 code0039 | [opencv提取指定颜色](scripts/code0039/Twog_r_b.py) | ✔️
+
+寻找图像中指定颜色（绿色），并将其抠出来或计算指定颜色的像素总数
 
 code0040 | [利用python多进程程或多线程的方式获取数据](scripts/code0040/mutiprocess.py) | ✔️
 
@@ -337,8 +341,11 @@ https://zhuanlan.zhihu.com/p/86593676
 (scripts/code0064/numpy-realizes-CNN-master/) |
 https://zhuanlan.zhihu.com/p/296592264
 
-(scripts/code0064/mnist_cnn.py)
+3、(scripts/code0064/mnist_cnn.py)
 通过使用numpy来搭建一个基础的包含卷积层、池化层、全连接层和Softmax层的卷积神经网络，并选择relu作为我们的激活函数，选择多分类交叉熵损失函数，最后使用了mnist数据集进行了训练和测试。
+
+4、(scripts/code0064/conv.py)
+实现numpy卷积
 
 code0065 | [BatchNormalization numpy](scripts/code0065/BatchNormalization1.py) | ✔️
 
@@ -346,10 +353,21 @@ numpy实现BN
 
 code0066 | [NMS numpy](scripts/code0066/NMS.py) | ✔️
 
-1\将所有的boxes按照置信度从小到大排序，然后从boxes中删除置信度最大的box
-2\将剩下的boxes与置信度最大的box，分别计算iou，去掉iou大于阈值(iou_threshold)的boxes
+1、将所有的boxes按照置信度从小到大排序，然后从boxes中删除置信度最大的box
+2、将剩下的boxes与置信度最大的box，分别计算iou，去掉iou大于阈值(iou_threshold)的boxes
 3\重复1，2直到索引为空
 
+code0067 | [focal loss numpy](scripts/code0067/focal_loss.py) | ✔️
+
+numpy 实现cross entropy loss 和 focal loss
+
+code0068 | [bilinear interpolation](scripts/code0068/bilinear_interpolation.py) | ✔️
+
+实现图像双线性插值
+
+code0069 | [常见激活函数](scripts/code0069/activation_func.py) | ✔️
+
+Sigmiod、Tanh、Relu、PReLU、Swish、Mish
 
 
 

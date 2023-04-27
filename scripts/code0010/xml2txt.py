@@ -2,11 +2,11 @@ import os
 import xml.etree.ElementTree as ET
 
 # xml文件存放目录(修改成自己的文件名)
-input_dir = '/home/watersmoke_data/all_xml/'
+input_dir = '/home/all_xml/'
 # 输出txt文件目录（自己创建的文件夹）
-out_dir = '/home/watersmoke_data/all_labels/'
+out_dir = '/home/all_labels/'
 
-class_list = ['ponding', 'smoke']
+class_list = ['a', 'b']
 
 
 # 获取目录所有xml文件

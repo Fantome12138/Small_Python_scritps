@@ -22,7 +22,7 @@ def img2col(x, ksize, stride):
     num = 0
     for i in range(feature_w):
         for j in range(feature_w): 
-            image_col[num] =  x[i*stride:i*stride+ksize, j*stride:j*stride+ksize, :].reshape(-1)
+            image_col[num] = x[i*stride:i*stride+ksize, j*stride:j*stride+ksize, :].reshape(-1)
             num += 1
     return image_col
     
