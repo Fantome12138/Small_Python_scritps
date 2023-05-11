@@ -23,6 +23,9 @@ code001 | [根据当前文件名批量复制](scripts/code001/copyfile.py)  | �
 (scripts/code001/copyfile2.py) 
 获取文件夹下所有指定格式文件，复制到其他文件夹
 
+(scripts/code001/copyfile3.py)
+yolo格式标注文件查找对应目标，将图像复制到指定文件夹 
+
 code002 | [两列表排序保持对应关系](scripts/code002/sort2list.py)  | ✔️
 
 两个列表元素排序后保持元素对应关系
@@ -369,5 +372,9 @@ code0069 | [常见激活函数](scripts/code0069/activation_func.py) | ✔️
 
 Sigmiod、Tanh、Relu、PReLU、Swish、Mish
 
+code0070 | [编辑距离计算](scripts/code0070/Levenshtein_Distance.py) | ✔️
 
+python计算两文本编辑距离，其内包含去除字符串标点和英文的方法
 
+Python比较文本相似度的7种方法
+https://blog.csdn.net/SpinMeRound/article/details/107465022
