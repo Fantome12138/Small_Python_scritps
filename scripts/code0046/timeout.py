@@ -34,8 +34,11 @@ class timeout(contextlib.ContextDecorator):
 
 @timeout(seconds=2, timeout_msg='bad', suppress_timeout_errors=True)
 def a(src):
-    time.sleep(1)
-    print(src)
+    try:
+        time.sleep(3)
+        print(src)
+    except Exception as e:
+        print('1')
     return 10
 
 c = a('233')

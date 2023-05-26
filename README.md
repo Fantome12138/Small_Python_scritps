@@ -256,6 +256,7 @@ code0045 | [Python 列表的交集、并集、差集](scripts/code0045/test.py) 
 
 code0046 | [超时处理函数timeout](scripts/code0046/timeout.py) | ✔️
 
+scripts/code0046/timeout2.py （推荐）
 设置一个超时函数 如果某个程序执行超时  就会触发超时处理函数_timeout_handler 返回超时异常信息
 
 code0047 | [打印或logging保存输出加颜色（好看）](scripts/code0047/color.py) | ✔️
