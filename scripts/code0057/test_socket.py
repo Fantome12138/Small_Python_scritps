@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import random
-import uuid
 from uuid import uuid4
-import cv2, os, time, copy, json, datetime
+import cv2, os, time, copy, json
 
 
 def short_uuid():

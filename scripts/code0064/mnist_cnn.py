@@ -1,11 +1,10 @@
+import os
+# os.environ['KMP_DUPLICATE_LIB_OK']='True'
 import numpy as np
 import torchvision
 import time, functools
 import logging
-
-'''https://www.cnblogs.com/qxcheng/p/11729773.html'''
-
-np.set_printoptions(threshold=np.inf)  
+np.set_printoptions(threshold=np.inf) 
 
 
 def onehot(targets, num):
@@ -22,7 +21,7 @@ def img2col(x, ksize, stride):
     num = 0
     for i in range(feature_w):
         for j in range(feature_w): 
-            image_col[num] = x[i*stride:i*stride+ksize, j*stride:j*stride+ksize, :].reshape(-1)
+            image_col[num] =  x[i*stride:i*stride+ksize, j*stride:j*stride+ksize, :].reshape(-1)
             num += 1
     return image_col
     
@@ -56,7 +55,7 @@ class Linear(object):
 ## conv
 class Conv(object):
     def __init__(self, kernel_shape, stride=1, pad=0):
-        width, height, in_channel, out_channel = kernel_shape
+        width, height, in_channel, out_channel = kernel_shape # 5 5 1 6
         self.stride = stride
         self.pad = pad
         scale = np.sqrt(3*in_channel*width*height/out_channel)
@@ -170,7 +169,7 @@ class Softmax(object):
 
 def train():
     # Mnist手写数字集
-    dataset_path = "./data/"
+    dataset_path = "./data"
     train_data = torchvision.datasets.MNIST(root=dataset_path, train=True, download=True)
     train_data.data = train_data.data.numpy()  # [60000,28,28]
     train_data.targets = train_data.targets.numpy()  # [60000]
@@ -187,8 +186,8 @@ def train():
     softmax = Softmax()
    
     lr = 0.01
-    batch = 3
-    for epoch in range(10):        
+    batch = 20
+    for epoch in range(2):        
         for i in range(0, 60000, batch):
             X = train_data.data[i:i+batch]
             Y = train_data.targets[i:i+batch]
@@ -216,11 +215,11 @@ def train():
             print("Epoch-{}-{:05d}".format(str(epoch), i), ":", "loss:{:.4f}".format(loss))
 
         lr *= 0.95**(epoch+1)
-        np.savez("data2.npz", k1=conv1.k, b1=conv1.b, k2=conv2.k, b2=conv2.b, w3=nn.W, b3=nn.b)
+        np.savez("./data/data2.npz", k1=conv1.k, b1=conv1.b, k2=conv2.k, b2=conv2.b, w3=nn.W, b3=nn.b)
 
 def eval():
-    r = np.load("data2.npz")
-    
+    r = np.load("./data/data2.npz")
+
     # Mnist手写数字集
     dataset_path = "./data/"
     test_data = torchvision.datasets.MNIST(root=dataset_path, train=False)
@@ -267,6 +266,23 @@ def eval():
 
     print("TEST-ACC: ", num/10000*100, "%")
 
+def test():
+    dataset_path = "./data/"
+    train_data = torchvision.datasets.MNIST(root=dataset_path, train=True, download=True)
+    train_data.data = train_data.data.numpy()  # [60000,28,28]
+    train_data.targets = train_data.targets.numpy()  # [60000]
+    train_data.data = train_data.data.reshape(60000, 28, 28, 1) / 255.   # 输入向量处理
+    train_data.targets = onehot(train_data.targets, 60000) # 标签one-hot处理 (60000, 10) 
+    print(train_data.data.shape, type(train_data.data), train_data.targets[2])
+    pass
+
 if __name__ == '__main__':
-    #train()
-    eval()
+    import time
+    print('go')
+    start_time = time.time()
+    train()
+    # eval()
+    # test()
+    end_time = time.time()
+    use_time = end_time - start_time
+    print(use_time)

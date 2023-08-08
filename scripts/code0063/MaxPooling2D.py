@@ -35,10 +35,10 @@ class MaxPooling2D:
                 start_j = j * self.stride
                 end_i = start_i + self.w_height
                 end_j = start_j + self.w_width
+                print(f'{start_i} {start_j} : {end_i} {end_j}')
                 out[i, j] = np.max(x[start_i: end_i, start_j: end_j])
                 # 放置原数值的索引
                 self.arg_max[i, j] = np.argmax(x[start_i: end_i, start_j: end_j])  
-        self.arg_max = self.arg_max
         return out
 
     def backward(self, d_loss):

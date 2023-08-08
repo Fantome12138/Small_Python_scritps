@@ -37,6 +37,7 @@ def retry_if_error(exception):
 
 @retry(retry_on_exception=retry_if_error,stop_max_attempt_number=2,\
         wait_fixed=1000,stop_max_delay=10000)
+
 def test():
     errorcode = 111
     ec = 0

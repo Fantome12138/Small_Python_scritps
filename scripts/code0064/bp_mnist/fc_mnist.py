@@ -98,7 +98,6 @@ class Network(object):
         self.weights = [np.random.randn(i, j) for i, j in zip(self.sizes[:-1], self.sizes[1:])]
         self.bias = [np.random.randn(1, j) for j in self.sizes[1:]]
 
-
     def forward(self, x):
         """
         用于推理，前向传播时不进行softmax概率化
@@ -196,7 +195,7 @@ def main():
     training_data, validation_data, test_data = load_data(path)
     model = Network([784, 30, 10])
     # training_data, validation_data, learning_rate, epochs, batch_size
-    model.train(training_data, validation_data, 1, 5, 100)
+    model.train(training_data, validation_data, 1, 50, 100)
 
 if __name__ == "__main__":
     main()

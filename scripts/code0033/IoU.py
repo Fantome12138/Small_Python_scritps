@@ -4,6 +4,7 @@ import torch
 
 
 def Iou(box1, box2, wh=False):
+    # 基础IOU
     if wh == False:
         xmin1, ymin1, xmax1, ymax1 = box1
         xmin2, ymin2, xmax2, ymax2 = box2
@@ -21,6 +22,40 @@ def Iou(box1, box2, wh=False):
     inter_area = (np.max([0, xx2-xx1])) * (np.max([0, yy2-yy1])) 
     iou = inter_area / (area1+area2-inter_area+1e-6)  
     return iou
+
+
+def CIou(box1, box2, wh=False):
+    if wh == False:
+        xmin1, ymin1, xmax1, ymax1 = box1
+        xmin2, ymin2, xmax2, ymax2 = box2
+    else:
+        xmin1, ymin1 = int(box1[0]-box1[2]/2.0), int(box1[1]-box1[3]/2.0)
+        xmax1, ymax1 = int(box1[0]+box1[2]/2.0), int(box1[1]+box1[3]/2.0)
+        xmin2, ymin2 = int(box2[0]-box2[2]/2.0), int(box2[1]-box2[3]/2.0)
+        xmax2, ymax2 = int(box2[0]+box2[2]/2.0), int(box2[1]+box2[3]/2.0)
+    xx1 = np.max([xmin1, xmin2])
+    yy1 = np.max([ymin1, ymin2])
+    xx2 = np.min([xmax1, xmax2])
+    yy2 = np.min([ymax1, ymax2])
+    area1 = (xmax1-xmin1) * (ymax1-ymin1)
+    area2 = (xmax2-xmin2) * (ymax2-ymin2)
+    inter_area = np.max([0, xx2-xx1]) * np.max([0,yy2-yy1])
+    iou = inter_area / (area1+area2-inter_area+1e-6)
+    
+    center_x1, center_y1 = (xmax1-xmin1)/2.0, (ymax1-ymin1)/2.0
+    center_x2, center_y2 = (xmax2-xmin2)/2.0, (ymax2-ymin2)/2.0
+    inter_diag = (center_x2-center_x1)**2 + (center_y2-center_y1)**2
+    outer_diag = (xx2-xx1)**2 + (yy2-yy1)**2
+    D = inter_diag / outer_diag
+    diou = iou - D
+    
+    w1, h1 = xmax1-xmin1, ymax1-ymin1
+    w2, h2 = xmax2-xmin2, ymax2-ymin2
+    v = (4/np.pi**2) * (np.arctan(w1/h1) - np.arctan(w2/h2))**2
+    a = v / ((1-iou) + v)
+    ciou = diou - a*v
+    return ciou
+
 
 def rect_overlap(rect1, rect2): 
     # 返回两候选框重叠部分的坐标
@@ -51,7 +86,7 @@ def Giou(rec1, rec2):
     Area = W*H    #交叉的面积
     add_area = sum_area - Area    #两矩形并集的面积
 
-    end_area = (area_C - add_area)/area_C    #闭包区域中不属于两个框的区域占闭包区域的比重
+    end_area = (area_C - add_area)/area_C    # 闭包区域中不属于两个框的区域占闭包区域的比重
     giou = iou - end_area
     return giou
 
@@ -98,6 +133,7 @@ def Diou(bboxes1, bboxes2):
     return dious
 
 def bbox_overlaps_ciou(bboxes1, bboxes2):
+    # Complete IoU，它在DIoU的基础上，还能同时考虑两个矩形的长宽比，也就是形状的相似性
     rows = bboxes1.shape[0]
     cols = bboxes2.shape[0]
     cious = torch.zeros((rows, cols))
@@ -147,3 +183,4 @@ def bbox_overlaps_ciou(bboxes1, bboxes2):
     if exchange:
         cious = cious.T
     return cious
+

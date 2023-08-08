@@ -236,7 +236,7 @@ xywhn2xyxy是将xywh(normalized) -> x1y1x2y2；xyxy2xywhn是将x1y1x2y2 -> xywh(
 code0038 | [判断点是否在多边形内](scripts/code0038/points.py) | ✔️
 判断一个点是否在多边形区域内
            [计算点到直线的距离](scripts/code0038/(point2line.py) | 
-
+判断两线是否相交
 
 code0039 | [opencv提取指定颜色](scripts/code0039/Twog_r_b.py) | ✔️
 
@@ -334,7 +334,10 @@ code0062 | [find QR code](scripts/code0062/find_qr.py) | ✔️
 
 code0063 | [MaxPooling2D](scripts/code0063/MaxPooling2D.py) | ✔️
 
-使用np,复现torch中的maxpooling函数
+使用np,复现torch中的maxpooling函数; 卷积后，池化后尺寸计算公式：
+(图像尺寸-卷积核尺寸 + 2*填充值)/步长+1
+
+$out(N_i, C_{out_j}) = bias(C_{out_j})+\sum_{k=0}^{c_{in}-1}weight(C_{out_j}, k)*input(N_i,k)$ 
 
 code0064 | [backprogram numpy](scripts/code0064/bp_mnist/fc_mnist.py) | ✔️
 
@@ -379,3 +382,11 @@ python计算两文本编辑距离，其内包含去除字符串标点和英文�
 
 Python比较文本相似度的7种方法
 https://blog.csdn.net/SpinMeRound/article/details/107465022
+
+code0071 | [K-means py实现](scripts/code0071/kmeans.py) | ✔️
+
+及yolo中使用的k-means方法聚类anchor尺寸
+
+code0072 | [中值滤波 py实现](scripts/code0072/medianBlur.py) | ✔️
+
+numpy实现中值、均值滤波

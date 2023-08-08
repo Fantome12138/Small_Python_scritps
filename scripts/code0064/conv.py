@@ -22,7 +22,6 @@ def conv_2d_single_kernel(input_data, kernel, stride):
         raise ValueError("channels: input_data:{}, kernel:{}".format(c, kernel_c))
 
     stride_h, stride_w = stride
-
     padding_h = (kernel_h-1) // 2
     padding_w = (kernel_w-1) // 2
     padding_data = np.zeros((c, h+padding_h*2, w+padding_w*2))
