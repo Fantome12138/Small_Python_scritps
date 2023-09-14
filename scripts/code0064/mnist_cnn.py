@@ -4,7 +4,7 @@ import numpy as np
 import torchvision
 import time, functools
 import logging
-np.set_printoptions(threshold=np.inf) 
+np.set_printoptions(threshold=np.inf)  
 
 
 def onehot(targets, num):
@@ -55,7 +55,7 @@ class Linear(object):
 ## conv
 class Conv(object):
     def __init__(self, kernel_shape, stride=1, pad=0):
-        width, height, in_channel, out_channel = kernel_shape # 5 5 1 6
+        width, height, in_channel, out_channel = kernel_shape
         self.stride = stride
         self.pad = pad
         scale = np.sqrt(3*in_channel*width*height/out_channel)
@@ -191,6 +191,7 @@ def train():
         for i in range(0, 60000, batch):
             X = train_data.data[i:i+batch]
             Y = train_data.targets[i:i+batch]
+            
 
             predict = conv1.forward(X)
             predict = relu1.forward(predict)

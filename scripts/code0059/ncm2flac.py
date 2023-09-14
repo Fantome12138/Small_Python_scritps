@@ -84,14 +84,15 @@ if __name__ == '__main__':
     # for file in file_list:
     #     filepath = "/home/music/"+file
         # dump(filepath)
-    for curDir, dirs, files in os.walk("/home/music/"):
+    _path = "/Users/fantome/Music/网易云音乐/a/"
+    for curDir, dirs, files in os.walk(_path):
         print("====================")
         print("现在的目录：" + curDir)
         print("该目录下包含的文件：" + str(files))
         for i in files:
             if i.endswith('ncm'):
                 print(i)
-                dump(str(i))
+                dump(_path+str(i))
             
         
         

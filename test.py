@@ -1,139 +1,33 @@
-import numpy as np
-
-
-def IOU(box1, box2):
-    xmin1, ymin1, xmax1, ymax1 = box1
-    xmin2, ymin2, xmax2, ymax2 = box2
+import os
+import xml.etree.ElementTree as ET
+ 
+origin_ann_dir = '/Users/fantome/Downloads/new_xml/'# 设置原始标签路径为 Annos
+new_ann_dir = '/Users/fantome/Downloads/xml/'# 设置新标签路径 Annotations
+for dirpaths, dirnames, filenames in os.walk(origin_ann_dir):   # os.walk游走遍历目录名
+  for filename in filenames:
+    print("process...")
+    if os.path.isfile(r'%s%s' %(origin_ann_dir, filename)):   # 获取原始xml文件绝对路径，isfile()检测是否为文件 isdir检测是否为目录
+      origin_ann_path = os.path.join(r'%s%s' %(origin_ann_dir, filename))   # 如果是，获取绝对路径（重复代码）
+      new_ann_path = os.path.join(r'%s%s' %(new_ann_dir, filename))
+      tree = ET.parse(origin_ann_path)  # ET是一个xml文件解析库，ET.parse（）打开xml文件。parse--"解析"
+      root = tree.getroot()   # 获取根节点
+      for object in root.findall('object'):   # 找到根节点下所有“object”节点
+        name = str(object.find('name').text)  # 找到object节点下name子节点的值（字符串）
+    # 如果name等于str，则删除该节点
+        if (name in ["r_light_on", "r_light_off",
+                    "g_light_on", "g_light_off",
+                    "y_light_on", "y_light_off", 
+                    "o_light_on", "o_light_off",
+                    "w_light_on", "w_light_off"]):
+            #   root.remove(object)
     
-    xx1 = np.max(xmin1, xmin2)
-    xx2 = np.min(xmax1, xmax2)
-    yy1 = np.max(ymin1, ymin2)
-    yy2 = np.min(ymax1, ymax2)
-    area1 = (xmax1-xmin1) * (ymax1-ymin1)
-    area2 = (xmax2-xmin2) * (ymax2-ymin2)
-    inter_area = np.max([0, xx2-xx1]) * np.max([0, yy2-yy1])
-    iou = inter_area / (area1+area2-inter_area+1e-6)    
-    
-    center_x1, center_y1 = (xmax1-xmin1)/2.0, (ymax1-ymin1)/2.0
-    center_x2, center_y2 = (xmax2-xmin2)/2.0, (ymax2-ymin2)/2.0
-    inter_diag = (center_x2-center_x1)**2 + (center_y2-center_y1)**2
-    outer_diag = (xx2-xx1)**2 + (yy2-yy1)**2
-    D = inter_diag / outer_diag
-    diou = iou - D
-    
-    w1, h1 = xmax1-xmin1, ymax1-ymin1
-    w2, h2 = xmax2-xmin2, ymax2-ymin2
-    v = (4/np.pi**2) * (np.arctan(w1/h1) - np.arctan(w2/h2))
-    a = v / ((1-iou) + v)
-    ciou = diou - a*v
-    
-    return ciou
-    
-    
-
-def isPointInPolygon(point, rangelist):
-    lnglist, latlist = [], []
-    for i in range(len(rangelist)-1):
-        lnglist.append(rangelist[i][0])
-        latlist.append(rangelist[i][1])
-    maxlng, minlng = max(lnglist), min(lnglist)
-    maxlat, minlat = max(latlist), min(latlist)
-    if (point[0]>maxlng) or (point[0]<minlng) or \
-        (point[1]>maxlat) or (point[1]<minlat):
-        return  False
-    
-    count = 0
-    point1 = rangelist[0]
-    for i in range(1, len(rangelist)):
-        point2 = rangelist[i]
-        # 点与多边形顶点重合
-        if ((point[0]==point1[0]) and (point[1]==point1[1])) or \
-            ((point[0]==point2[0]) and (point[1]==point2[1])):
-            print('点与多边形顶点重合')
-            return False
-
-        # 判断线段两端点是否在射线两侧，不在肯定不相交
-        if (point1[1]<point[1] and point2[1]>=point[1]) or \
-            (point1[1]>=point[1] and point2[1]<point[1]):
-            # 求线段与射线交点 再和lat比较
-            point12lng = point2[0] - (point2[1]-point[1]) * (point2[0]-point1[0])/(point2[1]-point1[1])
-            if point12lng == point[0]:
-                return False
-            if point12lng < point[0]:
-                count += 1
-        point1 = point2
-    if count%2 == 0:
-        return False
-    else: return True
-    
-
-class MaxPolling(object):
-    def __init__(self, kernel=(2,2), stride=2):
-        self.kernel = kernel
-        self.w_height = kernel[0]
-        self.w_width = kernel[1]
-        self.stride = stride
+            # # 如果name等于str，则修改name
+            #     if(name in ["other_light"]):
+            #       object.find('name').text = "person"
         
-        self.x = None
-        self.in_height, self.in_width = None, None
-        self.out_height, self.out_width = None, None
-        self.arg_max = None
-    
-    def __call__(self, x):
-        self.x = x
-        self.in_height = np.shape(x)[0]
-        self.in_width = np.shape(x)[1]
-        
-        self.out_height = int((self.in_height-self.w_height) / self.stride) + 1
-        self.out_width = int((self.in_width-self.w_width) / self.stride) + 1
-        
-        out = np.zeros((self.out_height, self.out_width))
-        self.arg_max = np.zeros_like(out, detype=np.int32)
-        
-        for i in range(self.out_height):
-            for j in range(self.out_width):
-                start_i = i * self.stride
-                start_j = j * self.stride
-                end_i = start_i + self.w_height
-                end_j = start_j + self.w_width
-                out[i, j] = np.max(x[start_i:end_i, start_j:end_j])
-                self.arg_max[i, j] = np.argmax(x[start_i:end_i, start_j:end_j])
-        return out
-    
-    def backward(self, d_loss):
-        dx = np.zeros_like(self.x)
-        for i in range(self.out_height):
-            for j in range(self.out_width):
-                start_i = i * self.stride
-                start_j = j * self.stride
-                end_i = start_i + self.w_height
-                end_j = start_j + self.w_width
-                index = np.unravel_index(self.arg_max[i,j], self.kernel)
-                dx[start_i:end_i, start_j:end_j][index] = d_loss[i,j]
-        return dx
-    
-def conv_2d(input, kernel, stride):
-    c, h, w = input.shape
-    kernel_c, kernel_h, kernel_w = kernel.shape
-    stride_h, stride_w = stride
-    
-    padding_h, padding_w = (kernel_h-1)//2, (kernel_w)//2
-    padding_data = np.zeros([c, h+padding_h*2, w+padding_w*2])
-    padding_data[:, padding_h:-padding_h, padding_w:-padding_w] = input
-    
-    out = np.zeros((h//stride_h, w//stride_w))
-    for idx_h, i, in enumerate(range(0, h-kernel_h, stride_h)):
-        for idx_w, j in enumerate(range(0, w-kernel_w, stride_w)):
-            window = padding_data[:, i:i+kernel_h, j:j+kernel_w]
-            out[idx_h, idx_w] = np.sum(window*kernel)
-    return out
-
-
-def onehot(targets, num):
-    result = np.zeros((num, 10))
-    for i in range(num):
-        result[i][targets[i]] = 1
-    return result
-
-
-
+            # 检查是否存在labelmap中没有的类别
+            for object in root.findall('object'):
+                name = str(object.find('name').text)
+                # if not (name in ["chepai","chedeng","chebiao"]):
+                #     print(filename + "------------->label is error--->" + name)
+            tree.write(new_ann_path)#tree为文件，write写入新的文件中。
