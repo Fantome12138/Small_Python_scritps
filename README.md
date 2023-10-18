@@ -390,3 +390,11 @@ code0071 | [K-means py实现](scripts/code0071/kmeans.py) | ✔️
 code0072 | [中值滤波 py实现](scripts/code0072/medianBlur.py) | ✔️
 
 numpy实现中值、均值滤波
+
+code0073 | [增广数据，复制-粘贴](scripts/code0073/demo.py) | ✔️
+
+https://blog.csdn.net/zengwubbb/article/details/113061776
+https://blog.csdn.net/oyezhou/article/details/111696577
+数据集增广，适用于小目标，对抠图下来的小目标随机粘贴至图像并保存其bbbox
+
+

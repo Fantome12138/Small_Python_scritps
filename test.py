@@ -1,33 +1,23 @@
 import os
-import xml.etree.ElementTree as ET
- 
-origin_ann_dir = '/Users/fantome/Downloads/new_xml/'# 设置原始标签路径为 Annos
-new_ann_dir = '/Users/fantome/Downloads/xml/'# 设置新标签路径 Annotations
-for dirpaths, dirnames, filenames in os.walk(origin_ann_dir):   # os.walk游走遍历目录名
-  for filename in filenames:
-    print("process...")
-    if os.path.isfile(r'%s%s' %(origin_ann_dir, filename)):   # 获取原始xml文件绝对路径，isfile()检测是否为文件 isdir检测是否为目录
-      origin_ann_path = os.path.join(r'%s%s' %(origin_ann_dir, filename))   # 如果是，获取绝对路径（重复代码）
-      new_ann_path = os.path.join(r'%s%s' %(new_ann_dir, filename))
-      tree = ET.parse(origin_ann_path)  # ET是一个xml文件解析库，ET.parse（）打开xml文件。parse--"解析"
-      root = tree.getroot()   # 获取根节点
-      for object in root.findall('object'):   # 找到根节点下所有“object”节点
-        name = str(object.find('name').text)  # 找到object节点下name子节点的值（字符串）
-    # 如果name等于str，则删除该节点
-        if (name in ["r_light_on", "r_light_off",
-                    "g_light_on", "g_light_off",
-                    "y_light_on", "y_light_off", 
-                    "o_light_on", "o_light_off",
-                    "w_light_on", "w_light_off"]):
-            #   root.remove(object)
-    
-            # # 如果name等于str，则修改name
-            #     if(name in ["other_light"]):
-            #       object.find('name').text = "person"
-        
-            # 检查是否存在labelmap中没有的类别
-            for object in root.findall('object'):
-                name = str(object.find('name').text)
-                # if not (name in ["chepai","chedeng","chebiao"]):
-                #     print(filename + "------------->label is error--->" + name)
-            tree.write(new_ann_path)#tree为文件，write写入新的文件中。
+import glob
+
+# 定义源目录和目标目录
+src_dir = '/Users/fantome/Downloads/新浦化学/2023-10-16-新采样日间样本/images/'
+dst_dir = '/Users/fantome/Downloads/新浦化学/2023-10-16-新采样日间样本/labels/'
+
+count = 0
+for filename in glob.glob(os.path.join(src_dir, '*.jpg')):
+    count += 1
+    # 构造新的文件名，即原文件名加上"led"
+    jpg_filename = os.path.splitext(filename)[0]
+    new_filename = 'new1_day' + str(count)
+    new_jpg_name = new_filename + '.jpg'
+    # 使用os.rename函数将原文件名修改为新的文件名
+    os.rename(filename, new_jpg_name)
+    # 在目标目录中查找是否有与新的文件名相同.txt文件
+    for txt_filename in glob.glob(os.path.join(dst_dir, '*.txt')):
+        if os.path.splitext(txt_filename)[0] == jpg_filename:
+            # 如果找到了匹配的.txt文件，就修改其文件名
+            new_txt_name = new_jpg_name + '.txt'
+            os.rename(txt_filename, new_txt_name)
+            break
