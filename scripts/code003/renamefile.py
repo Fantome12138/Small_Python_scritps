@@ -1,8 +1,8 @@
 '''该脚本会重新命名，删除原名称！'''
 import os
 def rename():
-    i = 0
-    path = '/Users/tmp_img/'
+    i = 75
+    path = '/Users/fantome/Downloads/盛强新材料/flap_new0109/save/'
 
     filelist = os.listdir(path)   #该文件夹下所有的文件（包括文件夹）
     for files in filelist:   #遍历所有文件
@@ -10,7 +10,7 @@ def rename():
         Olddir = os.path.join(path, files)    #原来的文件路径
         if os.path.isdir(Olddir):       #如果是文件夹则跳过
                 continue
-        filename = 'ew_two'     #文件名
+        filename = 'sheng_flap_0109new'     #文件名
         filetype = '.jpg'        #文件扩展名
         Newdir = os.path.join(path, filename + str(i) + filetype)   #新的文件路径
         os.rename(Olddir, Newdir)    #重命名

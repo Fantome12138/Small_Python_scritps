@@ -84,7 +84,7 @@ if __name__ == '__main__':
     # for file in file_list:
     #     filepath = "/home/music/"+file
         # dump(filepath)
-    _path = "/Users/fantome/Music/网易云音乐/a/"
+    _path = "/Users/fantome/Music/网易云音乐/ncm/"
     for curDir, dirs, files in os.walk(_path):
         print("====================")
         print("现在的目录：" + curDir)
@@ -93,6 +93,3 @@ if __name__ == '__main__':
             if i.endswith('ncm'):
                 print(i)
                 dump(_path+str(i))
-            
-        
-        

@@ -14,9 +14,9 @@ def GetFileNameAndExt(filename):
     (shotname, extension) = os.path.splitext(tempfilename)
     return shotname, extension
  
-source_dir = '/home/labels_tmnp/'
-target_dir = '/data0/all_images/'
-final_dir = '/home/images_tmp/'
+source_dir = '/Users/fantome/Downloads/新浦化学/数据集/xinpu_new1020/images'
+target_dir = '/Users/fantome/Downloads/新浦化学/数据集/xinpu_new1020/labels'
+final_dir = '/Users/fantome/Downloads/新浦化学/数据集/xinpu_new1020/new_labels'
  
 # 1.将指定A目录下的文件名取出,并将文件名文本和文件后缀拆分出来
 items = os.listdir(source_dir)  #得到文件夹下所有文件名称
@@ -30,7 +30,7 @@ for fileNum in items: #遍历文件夹
         (shotname, extension) = os.path.splitext(tempfilename); #将文件名文本与文件后缀分开
         
 # 2.将取出来的文件名文本与特定后缀拼接,再与路径B拼接,得到B目录下的文件
-        temptargetname = '%s.jpg' % shotname
+        temptargetname = '%s.txt' % shotname
         # tempxmlname = '%s.xml' % shotname
         xmlname = os.path.join(target_dir, temptargetname)
         print(xmlname)

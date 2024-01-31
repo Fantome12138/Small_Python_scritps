@@ -316,9 +316,9 @@ python多线程操作, 具体内容见Py3CookBook.md --> 第十二章：并发�
 实现使用wait()方法释放锁，并阻塞程序直到其他线程调用notify()或者notify_all()方法唤醒，然后wait()方法重新获取锁，
 类似于event.wait()方式，但看起来更高级。
 
-code0059 | [flac](scripts/code0059/ncm2flac_new.py) | ✔️
+code0059 | [flac](scripts/code0059/ncm2flac.py) | ✔️
 
-ncm格式音乐转flac格式
+ncm格式音乐转flac格式；改路径，flac文件会直接生成在改路径下
 
 code0060 | [find circle](scripts/code0060/find_circle.py) | ✔️
 
@@ -354,6 +354,12 @@ https://zhuanlan.zhihu.com/p/296592264
 4、(scripts/code0064/conv.py)
 实现numpy卷积
 
+5、（scripts/code0064/python_conv.py）
+原生python实现卷积神经网络
+
+https://blog.csdn.net/qq_43409114/article/details/105187448?spm=1001.2014.3001.5502 解析反向传播算法
+https://zhuanlan.zhihu.com/p/447113449 前向传播（forward）和反向传播（backward）
+
 code0065 | [BatchNormalization numpy](scripts/code0065/BatchNormalization1.py) | ✔️
 
 numpy实现BN
@@ -362,7 +368,9 @@ code0066 | [NMS numpy](scripts/code0066/NMS.py) | ✔️
 
 1、将所有的boxes按照置信度从小到大排序，然后从boxes中删除置信度最大的box
 2、将剩下的boxes与置信度最大的box，分别计算iou，去掉iou大于阈值(iou_threshold)的boxes
-3\重复1，2直到索引为空
+3、重复1，2直到索引为空
+
+https://zhuanlan.zhihu.com/p/80902998 CUDA版本
 
 code0067 | [focal loss numpy](scripts/code0067/focal_loss.py) | ✔️
 
@@ -397,5 +405,26 @@ code0073 | [增广数据，复制-粘贴](scripts/code0073/demo.py) | ✔️
 https://blog.csdn.net/zengwubbb/article/details/113061776
 https://blog.csdn.net/oyezhou/article/details/111696577
 数据集增广，适用于小目标，对抠图下来的小目标随机粘贴至图像并保存其bbbox
+
+code0074 | [md文件中查找修改内容](scripts/code0074/demo.py) | ✔️
+
+code0075 | [手撕 transformer ](scripts/code0075/test_transformer.py) | ✔️
+
+code0076 | [v7 onnx推理](scripts/code0076/detect_onnx_no_nms.py) | ✔️
+           [v7 onnx推理 MNS](scripts/code0076/detect_onnx_with_nms.py)
+
+带NMS的没测过
+
+code0077 | [yolo计算模型参数量](scripts/code0077/count_params.py) | ✔️
+
+yolo计算模型参数量和算力
+
+code0078 | [yolo数据集格式转coco format](scripts/code0078/txt2json.py) | ✔️
+
+yolo数据集txt格式label转成coco使用的json格式。
+1、split_train_val，将yolo数据分成train val（默认2:8）
+2、change_diff_class，根据要求改labels
+3、txt2json，生成train val的json
+4、concate_json，合并不同数据集的json
 
 
