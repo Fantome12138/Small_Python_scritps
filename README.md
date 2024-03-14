@@ -427,4 +427,13 @@ yolo数据集txt格式label转成coco使用的json格式。
 3、txt2json，生成train val的json
 4、concate_json，合并不同数据集的json
 
+code0079 | [凸四边形IOU计算](scripts/code0079/convex_quadrilaterals_iou.py) | ✔️
+https://www.hbblog.cn/OCR%E7%9B%B8%E5%85%B3/%E4%BB%BB%E6%84%8F%E5%87%B8%E5%9B%9B%E8%BE%B9%E5%BD%A2iou%E7%9A%84%E8%AE%A1%E7%AE%97/
+
+1.py 旋转矩形的坐标转换
+2.py 判断线段相交 可见code0038
+3.py 判断点是否在凸多边形内部 可见code0038
+4.py 凸包算法
+5.py 计算多边形面积
+convex_quadrilaterals_iou.py 凸四边形IOU计算
 
