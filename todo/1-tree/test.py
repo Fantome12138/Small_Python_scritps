@@ -1,8 +1,8 @@
-pre_res = [1,2,3]
+pre_res = []
 
-class Root:
-    def __init__(self, x):
-        self.val = x
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
         self.left = None
         self.right = None
 
@@ -13,10 +13,11 @@ def PerOrder(root, pre_res):
         PerOrder(root.left, pre_res)
     if root.right:
         PerOrder(root.right, pre_res)
-
-root = Root
-PerOrder(root, pre_res)
+    return pre_res
 
 
-
-
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+_res = PerOrder(root, pre_res)
+print(_res)
