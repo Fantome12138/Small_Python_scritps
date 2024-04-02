@@ -1,6 +1,0 @@
-# pip install -r requirements.txt
-# pip install --no-index --find-links=/home/ -r requirements.txt
-# Base ----------------------------------------
-retrying=1.3.4
-func_timeout=4.3.5
-

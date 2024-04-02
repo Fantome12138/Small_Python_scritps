@@ -1,11 +1,30 @@
 import numpy as np
 import torch
-import torch.nn.functional as F 
+import torch.nn.functional as F
 from torch import nn
+
+def mse(y_true, y_pred):
+    return np.mean((y_true - y_pred) ** 2)
+
+def mae(y_true, y_pred):
+    return np.mean(np.abs(y_true - y_pred))
+
+def dice_loss(y_true, y_pred, smooth=1):
+    """
+    参数:
+    - y_true: 真实标签的独热编码形式，形状应与 y_pred 相同。
+    - y_pred: 模型的预测分布，形状应与 y_true 相同。
+    - smooth: 一个很小的数，用于防止分母为零。
+    返回:
+    - Dice Loss 的值。
+    """
+    intersection = np.sum(y_true * y_pred, axis=(1, 2, 3))  # 沿着通道和其他维度求和
+    union = np.sum(y_true, axis=(1, 2, 3)) + np.sum(y_pred, axis=(1, 2, 3))  # 沿着通道和其他维度求和
+    dice = (2. * intersection + smooth) / (union + smooth)
+    return 1 - dice
 
 def sigmoid(x):
     return 1. / (1. + np.exp(-x))
-
 
 def CE(pred, label):
     loss = label * np.log(pred) + (1 - label) * np.log(1 - pred)

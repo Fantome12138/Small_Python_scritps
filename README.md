@@ -50,8 +50,6 @@ code005 | [随机复制文件](scripts/code005/randomcopy.py) | ✔️
 
 code006 | [CPU压力测试](scripts/code006/cputest.py) | ✔️
 
-测试CPU性能
-
 code007 | [cv2生成缩略图](scripts/code007/generateThumbnails.py) | ✔️
 
 code008 | [json转txt格式](scripts/code008/json2txt.py) | ✔️
@@ -65,7 +63,6 @@ code0011 | [统计xml目标种类数量](scripts/code0011/countxml.py) | ✔️
          | [统计txt目标种类数量](scripts/code0011/counttxt.py) | ✔️
          | [统计数据集GT大中小个数](scripts/code0011/count_bboxSML.py) | ✔️
          局限:统计真实标注框大小，仅有96*96，32*32等，针对640^2的图片，自己的的数据集要改统计框的尺寸
-
 
 根据xml文件统计目标种类以及数量
 
@@ -341,7 +338,7 @@ $out(N_i, C_{out_j}) = bias(C_{out_j})+\sum_{k=0}^{c_{in}-1}weight(C_{out_j}, k)
 
 code0064 | [backprogram numpy](scripts/code0064/bp_mnist/fc_mnist.py) | ✔️
 
-1、利用numpy实现神经网络,前向反向传播，mnist数据。
+1、利用numpy实现神经网络,前向反向传播，mnist数据。bp_mnist/fc_mnist.py
 https://zhuanlan.zhihu.com/p/86593676
 
 2、纯numpy实现CNN模块（LeNet5）  
@@ -362,7 +359,7 @@ https://zhuanlan.zhihu.com/p/447113449 前向传播（forward）和反向传播�
 
 code0065 | [BatchNormalization numpy](scripts/code0065/BatchNormalization1.py) | ✔️
 
-numpy实现BN
+numpy实现 BN
 
 code0066 | [NMS numpy](scripts/code0066/NMS.py) | ✔️
 
@@ -398,7 +395,22 @@ code0071 | [K-means py实现](scripts/code0071/kmeans.py) | ✔️
 
 code0072 | [中值滤波 py实现](scripts/code0072/medianBlur.py) | ✔️
 
-numpy实现中值、均值滤波
+numpy实现中值、均值滤波，高斯滤波
+
+1、均值滤波：
+
+通过取像素周围邻域内的像素值的平均值来替换该像素的值，从而达到平滑图像的效果
+
+2、高斯滤波器：
+
+将中心像素周围的像素按照高斯分布加权平均进行平滑化。这样的（二维）权值通常被称为卷积核（kernel）或者滤波器（filter）
+
+但是，由于图像的长宽可能不是滤波器大小的整数倍，因此我们需要在图像的边缘补0 。这种方法称作Zero Padding
+
+权值g（卷积核）要进行归一化操作 $G(x)=\frac{1}{2\pi \eth^2}e^{-\frac{x^2+y^2}{2\eth ^2}}$
+
+高斯掩膜的求解与位置(x,y)无关，因为在计算过程中x,y被抵消掉了,所以求一个kerne模板即可
+
 
 code0073 | [增广数据，复制-粘贴](scripts/code0073/demo.py) | ✔️
 
@@ -436,4 +448,62 @@ https://www.hbblog.cn/OCR%E7%9B%B8%E5%85%B3/%E4%BB%BB%E6%84%8F%E5%87%B8%E5%9B%9B
 4.py 凸包算法
 5.py 计算多边形面积
 convex_quadrilaterals_iou.py 凸四边形IOU计算
+
+code0080 | [手撕resnet](scripts/code0080/resnet.py) | ✔️
+
+code0081 | [计算两矩阵欧式距离](scripts/code0081/euclidean_distance.py) | ✔️
+
+$\rho= \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$
+
+$|x|=\sqrt{x^2_2+y^2_2}$
+
+其中 $\rho$ 是点间的欧氏距离，|x|是点(x2,y2)到原点的欧式距离
+
+code0082 | [线性卷积、互相关、自相关 Python实现](scripts/code0082/conv.py) | ✔️
+
+code0083 | [手撕adam、adamW](scripts/code0083/adam.py) | ✔️
+
+code0084 | [手撕分组注意力 groupAttention](scripts/code0084/groupAttention.py) | ✔️
+
+Grouped Query Attention 是一种注意力机制，它在自然语言处理（NLP）中被用来增强模型对输入序列的理解能力。这种机制通常在Transformer模型的变体中使用，通过将查询（queries）、键（keys）和值（values）进行分组，可以提高模型的效率和性能。
+在实现Grouped Query Attention时，我们通常会遵循以下步骤：
+
+初始化参数：定义模型中的参数，包括用于分组的参数和用于计算注意力分数的参数。
+
+准备输入数据：将输入序列分割成多个组，每个组包含一定数量的元素。这可以通过预先定义的规则或者根据输入数据的特点来完成。
+
+计算注意力分数：对于每个组，计算查询与键之间的点积，然后应用softmax函数来获取注意力权重。
+
+应用注意力权重：将注意力权重应用到对应的值上，然后将所有组的结果合并起来。
+
+输出结果：最后，输出经过注意力机制处理后的序列。
+
+code0085 | [手撕 SVD 奇异值分解](scripts/code0085/svd.py) | ✔️
+
+奇异值分解（Singular Value Decomposition，SVD）是线性代数中一种重要的矩阵分解方法。在很多应用领域，如信号处理、统计学、机器学习等，SVD都有着广泛的应用。对于一个 $m*×*n$ 的矩阵 A，SVD可以表示为：$A=U\sum V^T$ 其中：
+
+- U 是一个 m×m 的单位正交矩阵（即 $U^TU=I$）。
+- Σ 是一个 m×n 的对角矩阵，其对角线上的元素称为奇异值，是 A 的非负实数。
+- V 是一个 n×n 的单位正交矩阵（即 $VV^T=I$）。
+
+下面是手动实现SVD的步骤：
+
+1. 计算矩阵 A 的协方差矩阵 $A^TA$。
+2. 求解 $A^TA$ 的特征值和特征向量。
+3. 根据特征值计算奇异值，它们是特征值的平方根。
+4. 计算矩阵 V，它是 $A^TA$ 特征向量组成的矩阵。
+5. 计算矩阵 U，它是 AV（这里 V 是经过适当的转置以匹配奇异值的顺序）。
+
+code0086 | [手撕 SVM 支持向量机](scripts/code0086/svm.py) | ✔️
+
+SVM用于分类和回归分析。核心思想是找到一个超平面，以最大化不同类别之间的边界（或称为间隔）来对数据进行分类。
+
+首先，定义SVM的目标函数和优化问题。SVM的训练过程可以通过解决一个凸二次规划问题来实现，其目标是最大化间隔的同时最小化分类错误。这个问题可以通过拉格朗日乘子法转换为对偶问题，并使用序列最小优化（Sequential Minimal Optimization，SMO）算法或者梯度下降等方法求解。
+
+code0087 | [](scripts/code0087/.py) | ✔️
+
+
+
+
+
 

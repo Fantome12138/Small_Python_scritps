@@ -1,7 +1,7 @@
 """
 用numpy实现全连接神经网络, 用于mnist手写数字识别任务
 """
-import numpy as np 
+import numpy as np
 from utils.mnist_loader import load_data, load_batches
 
 ###################### 激活函数和导数 ##############################
@@ -106,7 +106,7 @@ class Network(object):
         a = x
         for weight, bias in zip(self.weights[:-1], self.bias[:-1]):
             z = np.dot(a, weight) + bias
-            a = relu(z) 
+            a = relu(z)
         # 在前向传播时不需要进行softmax概率化， 反向传播时才会用到
         logits = np.dot(a, self.weights[-1]) + self.bias[-1]
         return logits
@@ -126,7 +126,7 @@ class Network(object):
 
         ################# 前向传播 ##############################
         # zs, _as存储前向传播过程中的中间变量z和a，供反向传播时使用
-        zs = [] 
+        zs = []
         _as = []
 
         a = x
@@ -161,8 +161,7 @@ class Network(object):
 
     def train(self, training_data, validation_data, learning_rate, epochs, batch_size):
         val_accs = []
-
-        for epoch in range(epochs):           
+        for epoch in range(epochs):       
             ####################### 训练集进行训练 #############################
             x_batches, y_batches = load_batches(training_data, batch_size)
 
@@ -199,7 +198,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
