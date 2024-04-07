@@ -11,13 +11,28 @@ def sigmoid_function(z):
         fz.append(1/(1 + math.exp(-num)))
     return fz
 
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def softmax(x):
+    """
+    Args:
+        x (numpy 数组): 输入数组。
+    Returns:
+        numpy 数组: 经过 Softmax 函数处理后的输出数组。
+    """
+    exp_x = np.exp(x - np.max(x))  # 减去最大值以避免数值不稳定
+    return exp_x / np.sum(exp_x, axis=0)
+
+
+
 def Tanh():
     m = nn.Tanh()
 
 def relu():
     m = nn.RReLU(lower=0.1, upper=0.3)
-    
-    
+
+
 class Swish(nn.Module):
     __constants__ = ['beta']
     beta: int

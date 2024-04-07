@@ -7,16 +7,13 @@ def box_area(boxes: Tensor):
 def box_iou(boxes1: Tensor, boxes2: Tensor):
     area1 = box_area(boxes1)  # 每个框的面积 (N,)
     area2 = box_area(boxes2)  # (M,)
- 
     lt = torch.max(boxes1[:, None, :2], boxes2[:, :2])  # [N,M,2] # N中一个和M个比较； 所以由N，M 个
     rb = torch.min(boxes1[:, None, 2:], boxes2[:, 2:])  # [N,M,2]
- 
     wh = (rb - lt).clamp(min=0)  # [N,M,2]  #小于0的为0  clamp 钳；夹钳；
     inter = wh[:, :, 0] * wh[:, :, 1]  # [N,M]  
- 
     iou = inter / (area1[:, None] + area2 - inter)
     return iou  # NxM， boxes1中每个框和boxes2中每个框的IoU值；
- 
+
 def nms(boxes: Tensor, scores: Tensor, iou_threshold: float):
     keep = []  # 最终保留的结果， 在boxes中对应的索引；
     idxs = scores.argsort()  # 值从小到大的 索引
@@ -31,10 +28,10 @@ def nms(boxes: Tensor, scores: Tensor, iou_threshold: float):
         other_boxes = boxes[idxs]  # [?, 4]
         ious = box_iou(max_score_box, other_boxes)  # 一个框和其余框比较 1XM
         idxs = idxs[ious[0] <= iou_threshold]
- 
+
     keep = idxs.new(keep)  # Tensor
     return keep
- 
+
 box =  torch.tensor([[2,3.1,7,5],[3,4,8,4.8],[4,4,5.6,7],[0.1,0,8,1]]) 
 score = torch.tensor([0.5, 0.3, 0.2, 0.4])
 output = nms(boxes=box, scores=score, iou_threshold=0.3)

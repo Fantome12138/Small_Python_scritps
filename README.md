@@ -180,7 +180,7 @@ Python图片查找轮廓、多边形拟合、最小外接矩形操作实例
 scripts/code0036/frame_diff.py
 帧差法得到运动背景图像(简单差分方法)
 
-## code0037 | [yolov5代码详细解析](scripts/code0037/yolov5.md) |  
+code0037 | [yolov5代码详细解析](scripts/code0037/yolov5.md) |  
 
 代码详细解析，引用自[CSDN--满船清梦压星河HK]
 https://blog.csdn.net/qq_38253797/category_11222727.html
@@ -369,9 +369,16 @@ code0066 | [NMS numpy](scripts/code0066/NMS.py) | ✔️
 
 https://zhuanlan.zhihu.com/p/80902998 CUDA版本
 
-code0067 | [focal loss numpy](scripts/code0067/focal_loss.py) | ✔️
+anchor 如何映射回原图 (scripts/code0066/anchor.py)
 
-numpy 实现cross entropy loss 和 focal loss
+code0067 | [focal loss &常见损失函数](scripts/code0067/focal_loss.py) | ✔️
+
+numpy 实现cross entropy loss 和 focal loss 和常见损失函数
+
+Logistic Regression:
+
+使用Python实现一个逻辑回归模型，并使用梯度下降来最小化交叉熵损失函数(使用sigmoid激活)
+(scripts/code0067/logistic_Regression.py)
 
 code0068 | [bilinear interpolation](scripts/code0068/bilinear_interpolation.py) | ✔️
 
@@ -500,9 +507,9 @@ SVM用于分类和回归分析。核心思想是找到一个超平面，以最�
 
 首先，定义SVM的目标函数和优化问题。SVM的训练过程可以通过解决一个凸二次规划问题来实现，其目标是最大化间隔的同时最小化分类错误。这个问题可以通过拉格朗日乘子法转换为对偶问题，并使用序列最小优化（Sequential Minimal Optimization，SMO）算法或者梯度下降等方法求解。
 
-code0087 | [](scripts/code0087/.py) | ✔️
+code0087 | [最近邻|双线性插值](scripts/code0087/interpolation.py) | ✔️
 
-
+code0088 | [](scripts/code0088/.py) | ✔️
 
 
 

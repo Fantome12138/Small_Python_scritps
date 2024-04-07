@@ -54,7 +54,7 @@ def numpy_nms(boxes :array, scores :array, iou_threshold :float):
         other_boxes = boxes[idxs]  # [?, 4]
         ious = box_iou(max_score_box, other_boxes)  # 一个框和其余框比较 1XM
         idxs = idxs[ious[0] <= iou_threshold]
-    keep = np.array(keep)  
+    keep = np.array(keep)
     return keep
 
 box =  np.array([[2,3.1,7,5],[3,4,8,4.8],[4,4,5.6,7],[0.1,0,8,1]]) 

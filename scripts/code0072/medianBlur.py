@@ -1,25 +1,20 @@
-# -*- coding: utf-8 -*-
 import numpy as np
-import cv2
 
-
-def mean_Blur(img, K_size=3):
+def mean_Blur(img, K_size=3): # 均值滤波
     h, w, c = img.shape
     # 零填充
     pad = K_size // 2
     out = np.zeros((h+2*pad, w+2*pad, c), dtype=np.float)
     out[pad:pad+h, pad:pad+w] = img.copy().astype(np.float)
-    # 卷积的过程
     tmp = out.copy()
     for y in range(h):
         for x in range(w):
             for ci in range(c):
                 out[pad+y,pad+x,ci] = np.mean(tmp[y:y+K_size, x:x+K_size, ci])
     out = out[pad:pad+h, pad:pad+w].astype(np.uint8)
-
     return out
 
-def median_Blur(img, filiter_size=3):  #当输入的图像为彩色图像
+def median_Blur(img, filiter_size=3):  #中值滤波
     image_copy = np.array(img, copy = True).astype(np.float32)
     processed = np.zeros_like(image_copy)
     middle = int(filiter_size / 2)
@@ -46,10 +41,8 @@ def median_Blur(img, filiter_size=3):  #当输入的图像为彩色图像
     processed = np.clip(processed, 0, 255).astype(np.uint8)
     return processed
 
-import numpy as np
 import scipy.signal as signal
-
-def gaussian_filter(size, sigma):
+def gaussian_filter(size, sigma): # 高斯滤波
     """
     Create a 2D Gaussian filter.
     np.mgrid函数可以生成从指定的起始点到结束点的均匀间隔的整数序列，
@@ -69,6 +62,7 @@ def apply_gaussian_filter(image, size, sigma):
 image = np.random.rand(100, 100)
 filtered_image = apply_gaussian_filter(image, 5, 1.0)
 print("Filtered image:\n", filtered_image)
+
 
 
 def median_Blur_gray(img, filiter_size=3):  #当输入的图像为灰度图像

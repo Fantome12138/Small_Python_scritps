@@ -2,12 +2,11 @@ import numpy as np
 import torch
 from torch import nn
 
-'''https://zhuanlan.zhihu.com/p/100672008'''
 
 class MyBN:
-    
     def __init__(self, momentum, eps, num_features):
         """
+        https://zhuanlan.zhihu.com/p/100672008
         初始化参数值
         :param momentum: 追踪样本整体均值和方差的动量
         :param eps: 防止数值计算错误
@@ -23,10 +22,10 @@ class MyBN:
         # 对应论文中需要更新的beta和gamma，采用pytorch文档中的初始化值
         self._beta = np.zeros(shape=(num_features, ))
         self._gamma = np.ones(shape=(num_features, ))
-        
+
     def batch_norm(self, x):
         """
-        BN向传播
+        BN前向传播
         :param x: 数据
         :return: BN输出
         """
@@ -54,3 +53,31 @@ my_bn._beta = bn_torch.bias.detach().numpy()
 my_bn._gamma = bn_torch.weight.detach().numpy()
 bn_output = my_bn.batch_norm(data, )
 print(bn_output)
+
+
+class GroupNorm(nn.Module):
+    def __init__(self, num_groups, num_channels, eps=1e-5):
+        super(GroupNorm, self).__init__()
+        self.weight = nn.Parameter(torch.ones(1, num_channels, 1, 1))
+        self.bias = nn.Parameter(torch.zeros(1, num_channels, 1, 1))
+        self.num_groups = num_groups
+        self.eps = eps
+
+    def forward(self, x):
+        N, C, H, W = x.size()
+        G = self.num_groups
+        assert C % G == 0
+
+        x = x.view(N, G, -1)
+        mean = x.mean(-1, keepdim=True)
+        var = x.var(-1, keepdim=True)
+
+        x = (x - mean) / (var + self.eps).sqrt()
+        x = x.view(N, C, H, W)
+        return x * self.weight + self.bias
+
+x = torch.linspace(0, 47, 48, dtype=torch.float32)
+x = x.reshape([2, 6, 2, 2])
+gn = GroupNorm(num_groups=3, num_channels=6)
+x = gn(x)
+print(x.shape)

@@ -4,24 +4,53 @@ import torch
 
 
 def Iou(box1, box2, wh=False):
-    # 基础IOU
     if wh == False:
         xmin1, ymin1, xmax1, ymax1 = box1
         xmin2, ymin2, xmax2, ymax2 = box2
     else:
-        xmin1, ymin1 = int(box1[0]-box1[2]/2.0), int(box1[1]-box1[3]/2.0)
-        xmax1, ymax1 = int(box1[0]+box1[2]/2.0), int(box1[1]+box1[3]/2.0)
-        xmin2, ymin2 = int(box2[0]-box2[2]/2.0), int(box2[1]-box2[3]/2.0)
-        xmax2, ymax2 = int(box2[0]+box2[2]/2.0), int(box2[1]+box2[3]/2.0)
+        xmin1, ymin1 = int(box1[0]-box1[2]/2.), int(box1[1]-box1[3]/2.)
+        xmax1, ymax1 = int(box1[0]+box1[2]/2.), int(box1[1]+box1[3]/2.)
+        xmin2, ymin2 = int(box2[0]-box2[2]/2.), int(box2[1]-box2[3]/2.)
+        xmax2, ymax2 = int(box2[0]+box2[2]/2.), int(box2[1]+box2[3]/2.)
+    xx1 = np.max([xmin1, xmin2])
+    yy1 = np.max([ymin1, ymin2])
+    xx2 = np.max([xmax1, xmax2])
+    yy2 = np.max([ymax1, ymax2])
+    area1 = (xmax1-xmin1) * (ymax1-ymin1) # 第一个矩形框的面积
+    area2 = (xmax2-xmin2) * (ymax2-ymin2) # 第二个矩形框的面积
+    inter_area = (np.max([0, xx2-xx1])) * (np.max([0, yy2-yy1]))
+    union_area = area1 + area2 - inter_area
+    iou = inter_area / (union_area+1e-6)
+    return iou
+
+def GIou(box1, box2, wh=False):
+    if wh == False:
+        xmin1, ymin1, xmax1, ymax1 = box1
+        xmin2, ymin2, xmax2, ymax2 = box2
+    else:
+        xmin1, ymin1 = int(box1[0]-box1[2]/2.), int(box1[1]-box1[3]/2.)
+        xmax1, ymax1 = int(box1[0]+box1[2]/2.), int(box1[1]+box1[3]/2.)
+        xmin2, ymin2 = int(box2[0]-box2[2]/2.), int(box2[1]-box2[3]/2.)
+        xmax2, ymax2 = int(box2[0]+box2[2]/2.), int(box2[1]+box2[3]/2.)
     xx1 = np.max([xmin1, xmin2])
     yy1 = np.max([ymin1, ymin2])
     xx2 = np.min([xmax1, xmax2])
-    yy2 = np.min([ymax1, ymax2])	
-    area1 = (xmax1-xmin1) * (ymax1-ymin1) 
-    area2 = (xmax2-xmin2) * (ymax2-ymin2)
-    inter_area = (np.max([0, xx2-xx1])) * (np.max([0, yy2-yy1])) 
-    iou = inter_area / (area1+area2-inter_area+1e-6)  
-    return iou
+    yy2 = np.min([ymax1, ymax2])
+
+    area1 = (xmax1 - xmin1) * (ymax1 - ymin1)
+    area2 = (xmax2 - xmin2) * (ymax2 - ymin2)
+    inter_area = np.max([0, xx2 - xx1]) * np.max([0, yy2 - yy1])
+    union_area = area1 + area2 - inter_area
+    iou = inter_area / (union_area + 1e-6)
+    # Calculate enclosing box 最小闭包区域
+    enc_xmin = np.min([xmin1, xmin2])
+    enc_ymin = np.min([ymin1, ymin2])
+    enc_xmax = np.max([xmax1, xmax2])
+    enc_ymax = np.max([ymax1, ymax2])
+    enc_area = (enc_xmax - enc_xmin) * (enc_ymax - enc_ymin)
+    # Calculate GIOU
+    giou = iou - (enc_area - union_area) / (enc_area + 1e-6)
+    return giou
 
 
 def CIou(box1, box2, wh=False):
@@ -90,47 +119,73 @@ def Giou(rec1, rec2):
     giou = iou - end_area
     return giou
 
-def Diou(bboxes1, bboxes2):
-    rows = bboxes1.shape[0]
-    cols = bboxes2.shape[0]
-    dious = torch.zeros((rows, cols))
-    if rows * cols == 0:#
-        return dious
-    exchange = False
-    if bboxes1.shape[0] > bboxes2.shape[0]:
-        bboxes1, bboxes2 = bboxes2, bboxes1
-        dious = torch.zeros((cols, rows))
-        exchange = True
-    # #xmin,ymin,xmax,ymax->[:,0],[:,1],[:,2],[:,3]
-    w1 = bboxes1[:, 2] - bboxes1[:, 0]
-    h1 = bboxes1[:, 3] - bboxes1[:, 1] 
-    w2 = bboxes2[:, 2] - bboxes2[:, 0]
-    h2 = bboxes2[:, 3] - bboxes2[:, 1]
-    
+def DIou(box1, box2, wh=False):
+    if wh == False:
+        xmin1, ymin1, xmax1, ymax1 = box1
+        xmin2, ymin2, xmax2, ymax2 = box2
+    else:
+        xmin1, ymin1 = int(box1[0]-box1[2]/2.0), int(box1[1]-box1[3]/2.0)
+        xmax1, ymax1 = int(box1[0]+box1[2]/2.0), int(box1[1]+box1[3]/2.0)
+        xmin2, ymin2 = int(box2[0]-box2[2]/2.0), int(box2[1]-box2[3]/2.0)
+        xmax2, ymax2 = int(box2[0]+box2[2]/2.0), int(box2[1]+box2[3]/2.0)
+    center_x1 = (xmin1 + xmax1) / 2.0
+    center_y1 = (ymin1 + ymax1) / 2.0
+    center_x2 = (xmin2 + xmax2) / 2.0
+    center_y2 = (ymin2 + ymax2) / 2.0
+    # 计算框的宽度和高度
+    w1 = xmax1 - xmin1
+    h1 = ymax1 - ymin1
+    w2 = xmax2 - xmin2
+    h2 = ymax2 - ymin2
+    # IoU计算
+    inter_area = (np.max([0, np.min([xmax1, xmax2])-np.max([xmin1, xmin2])])) * (np.max([0, np.min([ymax1, ymax2])-np.max([ymin1, ymin2])]))
     area1 = w1 * h1
     area2 = w2 * h2
+    union_area = area1 + area2 - inter_area
+    iou = inter_area / (union_area + 1e-6)
+    # 中心点距离的平方
+    center_distance = np.power(center_x1 - center_x2, 2) + np.power(center_y1 - center_y2, 2)
+    # 对角线距离的平方
+    diagonal_distance = np.power(np.max([xmax1, xmax2])-np.min([xmin1, xmin2]), 2) + np.power(np.max([ymax1, ymax2])-np.min([ymin1, ymin2]), 2)
+    # DIoU = IoU - 中心距离/对角线距离
+    diou = iou - center_distance / (diagonal_distance + 1e-6)
 
-    center_x1 = (bboxes1[:, 2] + bboxes1[:, 0]) / 2 
-    center_y1 = (bboxes1[:, 3] + bboxes1[:, 1]) / 2 
-    center_x2 = (bboxes2[:, 2] + bboxes2[:, 0]) / 2
-    center_y2 = (bboxes2[:, 3] + bboxes2[:, 1]) / 2
+    return diou
 
-    inter_max_xy = torch.min(bboxes1[:, 2:],bboxes2[:, 2:]) 
-    inter_min_xy = torch.max(bboxes1[:, :2],bboxes2[:, :2]) 
-    out_max_xy = torch.max(bboxes1[:, 2:],bboxes2[:, 2:]) 
-    out_min_xy = torch.min(bboxes1[:, :2],bboxes2[:, :2])
+def CIou(box1, box2, wh=False):
+    if wh == False:
+        xmin1, ymin1, xmax1, ymax1 = box1
+        xmin2, ymin2, xmax2, ymax2 = box2
+    else:
+        xmin1, ymin1 = int(box1[0]-box1[2]/2.0), int(box1[1]-box1[3]/2.0)
+        xmax1, ymax1 = int(box1[0]+box1[2]/2.0), int(box1[1]+box1[3]/2.0)
+        xmin2, ymin2 = int(box2[0]-box2[2]/2.0), int(box2[1]-box2[3]/2.0)
+        xmax2, ymax2 = int(box2[0]+box2[2]/2.0), int(box2[1]+box2[3]/2.0)
+    center_x1 = (xmin1 + xmax1) / 2.0
+    center_y1 = (ymin1 + ymax1) / 2.0
+    center_x2 = (xmin2 + xmax2) / 2.0
+    center_y2 = (ymin2 + ymax2) / 2.0
+    w1 = xmax1 - xmin1
+    h1 = ymax1 - ymin1
+    w2 = xmax2 - xmin2
+    h2 = ymax2 - ymin2
+    inter_area = (np.max([0, np.min([xmax1, xmax2])-np.max([xmin1, xmin2])])) * (np.max([0, np.min([ymax1, ymax2])-np.max([ymin1, ymin2])]))
+    area1 = w1 * h1
+    area2 = w2 * h2
+    union_area = area1 + area2 - inter_area
+    iou = inter_area / (union_area + 1e-6)
+    
+    center_distance = np.power(center_x1 - center_x2, 2) + np.power(center_y1 - center_y2, 2)
+    diagonal_distance = np.power(np.max([xmax1, xmax2])-np.min([xmin1, xmin2]), 2) + np.power(np.max([ymax1, ymax2])-np.min([ymin1, ymin2]), 2)
+    
+    v = 4 / (np.pi ** 2) * (np.arctan(w2 / (h2 + 1e-6)) - np.arctan(w1 / (h1 + 1e-6))) ** 2
+    # np.errstate是一个上下文管理器，用于处理浮点数错误。如忽略除0的错误
+    with np.errstate(divide='ignore',invalid='ignore'):
+        alpha = v / (1 - iou + v)
+    ciou = iou - (center_distance / (diagonal_distance + 1e-6) + alpha * v)
+    
+    return ciou
 
-    inter = torch.clamp((inter_max_xy - inter_min_xy), min=0)
-    inter_area = inter[:, 0] * inter[:, 1]
-    inter_diag = (center_x2 - center_x1)**2 + (center_y2 - center_y1)**2
-    outer = torch.clamp((out_max_xy - out_min_xy), min=0)
-    outer_diag = (outer[:, 0] ** 2) + (outer[:, 1] ** 2)
-    union = area1+area2-inter_area
-    dious = inter_area / union - (inter_diag) / outer_diag
-    dious = torch.clamp(dious,min=-1.0,max = 1.0)
-    if exchange:
-        dious = dious.T
-    return dious
 
 def bbox_overlaps_ciou(bboxes1, bboxes2):
     # Complete IoU，它在DIoU的基础上，还能同时考虑两个矩形的长宽比，也就是形状的相似性
